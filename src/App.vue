@@ -19,7 +19,6 @@
 
     <div class="fd-center">
       <router-view></router-view>
-
     </div>
 
     <div class="fd-bottom">
