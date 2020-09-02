@@ -4,11 +4,10 @@
 
 <script>
 export default {
-  name: "category"}
-
+  name: "Guanyuwo"
+}
 </script>
 
 <style scoped>
-
 
 </style>

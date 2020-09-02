@@ -11,7 +11,7 @@
           <router-link to="/category"><span>文章分类</span></router-link>
           <router-link to to="/guidang"><span>文章归档</span></router-link>
           <router-link to="/lianjie"><span>友情链接</span></router-link>
-          <router-link><span>关于我</span></router-link>
+          <router-link to="/guanyuwo"><span>关于我</span></router-link>
           <span><i class="el-icon-search"></i></span>
         </div>
       </div>
@@ -19,11 +19,14 @@
 
     <div class="fd-center">
       <router-view></router-view>
+
     </div>
 
     <div class="fd-bottom">
       蜀ICP备18020377号
+
     </div>
+
   </div>
 
 </template>
@@ -229,11 +232,11 @@ display: flex;
 
 .fd-center {
   display: flex;
- height: auto;
+  min-height: 200px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .fd-bottom {

@@ -120,13 +120,13 @@ export default {
 .toubu-box{
   height: 200px;
   width: 100%;
-  background: #000;
+  background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%);
   margin-top: 20px;
 }
 .fd-kapian{
   width: 100%;
   height: 1000px;
-  background: saddlebrown;
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
   display: flex;
   justify-content: center;
   align-content: center;
