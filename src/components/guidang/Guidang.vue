@@ -10,6 +10,9 @@
       </div>
     </div>
     <div class="fd-time">
+      <div class="fd-sjz">
+
+      </div>
     </div>
   </div>
 </template>
@@ -68,7 +71,7 @@ data(){
       },{
         name : "DateUtils (11)"
       },{
-        name : "HashMap (7) (11)"
+        name : "HashMap (7)"
       },{
         name : "jdk源代码 (1)"
       },{
@@ -162,5 +165,12 @@ data(){
   margin-top: -20px;
   border-radius: 5px;
   background: #a8edea;
+  display: flex;
+  justify-content: center;
+}
+.fd-sjz{
+  height: 100%;
+  width: 5px;
+  background: #ff9a9e;
 }
 </style>
