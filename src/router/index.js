@@ -4,7 +4,7 @@ import Home from '@/components/home/Home'
 import Category from '@/components/category/Category'
 import Guidang from '@/components/guidang/Guidang'
 import Lianjie from '@/components/lianjie/Lianjie'
-
+import guanyuwo from '@/components/guanyuwo/guanyuwo'
 
 Vue.use(Router)
 
@@ -34,6 +34,11 @@ export default new Router({
       path: '/lianjie',
       name: 'Lianjie',
       component: Lianjie
+    },
+    {
+      path:'/guanyuwo',
+      name:'guanyuwo',
+      component: guanyuwo
     }
   ]
 })

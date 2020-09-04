@@ -4,32 +4,25 @@
       <div class="fd-head-center">
         <div class="fd-logo-box">
           <span class="logo-one"><img src="/static/image/card5.jpg"></span>
-        <span class="boke">My blog site</span>
+          <span class="boke">My blog site</span>
         </div>
         <div class="fd-logo-tile">
           <router-link to="/home"><span>博客首页</span></router-link>
           <router-link to="/category"><span>文章分类</span></router-link>
-          <router-link to to="/guidang"><span>文章归档</span></router-link>
+          <router-link to="/guidang"><span>文章归档</span></router-link>
           <router-link to="/lianjie"><span>友情链接</span></router-link>
           <router-link to="/guanyuwo"><span>关于我</span></router-link>
           <span><i class="el-icon-search"></i></span>
-
-
         </div>
       </div>
     </div>
-
     <div class="fd-center">
       <router-view></router-view>
     </div>
-
     <div class="fd-bottom">
       蜀ICP备18020377号
-
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -156,10 +149,12 @@ export default {
   margin: 0;
   padding: 0;
 }
-.zujian{
+
+.zujian {
   font-size: 50px;
   color: #fad0c4;
 }
+
 #app {
   display: flex;
   flex-direction: column;
@@ -176,22 +171,26 @@ export default {
   position: fixed;
   z-index: 10;
 }
-a{
+
+a {
   text-decoration: none;
 }
+
 .fd-head-center {
   width: 1400px;
   height: 100%;
   display: flex;
 }
-.fd-logo-box{
+
+.fd-logo-box {
   height: 80px;
   width: 250px;
 
-display: flex;
+  display: flex;
   flex-direction: row;
 }
-.boke{
+
+.boke {
   font-size: 25px;
   font-family: 华文细黑;
   display: flex;
@@ -199,19 +198,19 @@ display: flex;
   align-items: center;
   margin-left: 15px;
 }
-.logo-one{
+
+.logo-one {
   display: flex;
   justify-content: center;
   align-items: center;
 
 }
-.logo-one img{
+
+.logo-one img {
   height: 66px;
   width: 66px;
   border-radius: 33px;
 }
-
-
 
 
 .fd-logo-tile {
@@ -227,8 +226,9 @@ display: flex;
   color: #2e3032;
   font-family: "Microsoft YaHei";
 }
-.router-link-active span{
-  color: coral ;
+
+.router-link-active span {
+  color: coral;
 }
 
 .fd-center {
@@ -249,7 +249,8 @@ display: flex;
   justify-content: center;
   align-items: center;
 }
-.tubiao{
+
+.tubiao {
   font-size: 40px;
 }
 
