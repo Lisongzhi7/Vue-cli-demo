@@ -5,8 +5,12 @@ import App from './App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
 Vue.use(ElementUI)
-
+AOS.init();
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

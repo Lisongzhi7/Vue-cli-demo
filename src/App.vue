@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div class="fd-head">
+    <div v-if="!showNav" class="fd-head">
       <div class="fd-head-center">
         <div class="fd-logo-box">
-          <span class="logo-one"><img src="/static/image/card5.jpg"></span>
+          <span class="logo-one"><img src="/static/image/card6.png"></span>
           <span class="boke">My blog site</span>
         </div>
         <div class="fd-logo-tile">
@@ -12,9 +12,31 @@
           <router-link to="/guidang"><span>文章归档</span></router-link>
           <router-link to="/lianjie"><span>友情链接</span></router-link>
           <router-link to="/guanyuwo"><span>关于我</span></router-link>
-          <span><i class="el-icon-search"></i></span>
+          <span @click="dialogFormVisible = true"><i class="el-icon-search"></i></span>
         </div>
       </div>
+      <el-dialog  :modal-append-to-body="false" :show-close="false"  title="搜索" :visible.sync="dialogFormVisible">
+        <div class="zhezhao"></div>
+      </el-dialog>
+    </div>
+    <div v-if="showNav" class="fd-head second ">
+      <div class="fd-head-center">
+        <div class="fd-logo-box">
+          <span class="logo-one"><img src="/static/image/card6.png"></span>
+          <span class="boke">My blog site</span>
+        </div>
+        <div class="fd-logo-tile wenzi">
+          <router-link to="/home"><span>博客首页</span></router-link>
+          <router-link to="/category"><span>文章分类</span></router-link>
+          <router-link to="/guidang"><span>文章归档</span></router-link>
+          <router-link to="/lianjie"><span>友情链接</span></router-link>
+          <router-link to="/guanyuwo"><span>关于我</span></router-link>
+          <span @click="dialogFormVisible = true"><i class="el-icon-search"></i></span>
+        </div>
+      </div>
+      <el-dialog  :modal-append-to-body="false" :show-close="false"  title="搜索" :visible.sync="dialogFormVisible">
+        <div class="zhezhao"></div>
+      </el-dialog>
     </div>
     <div class="fd-center">
       <router-view></router-view>
@@ -30,100 +52,13 @@
 
 export default {
   name: 'App',
-  data() {
-    return {
-      articles: [
-        {
-          title: "vue学习笔记",
-          desc: "从基础的Vue学习，掌握方法，做好笔记，扎实学好入门Vue",
-          time: "2020年08月27日",
-          author: "李松直",
-          tag: [
-            {
-              name: "Vue"
-            },
-            {
-              name: "javaScript"
-            },
-            {
-              name: "前端"
-            },
-            {
-              name: "学习笔记"
-            }
-          ]
-        },
-        {
-          title: "Html学习笔记",
-          desc: "了解并掌握Html语义，用法，从最基础的做起，养成做笔记的习惯",
-          time: "2020年08月27日",
-          author: "李松直",
-          tag: [
-            {
-              name: "Vue"
-            },
-            {
-              name: " 初级"
-            },
-            {
-              name: "Html"
-            },
-            {
-              name: "学习笔记"
-            }
-          ]
-        },
-        {
-          title: "Git学习笔记",
-          desc: "Git，分布式版本控制系统，git支持分布式部署，可以有效、高速的处理从很小到非常大的项目版本管理。",
-          time: "2020年08月26日",
-          author: "李松直",
-          tag: [
-            {
-              name: "Git"
-            },
-            {
-              name: "代码管理"
-            }
-          ]
-        },
-        {
-          title: "日常读书",
-          desc: "读书积累知识，理解并掌握其核心知识，懂得温故而知新",
-          time: "2020年08月26日",
-          author: "李松直",
-          tag: [
-            {
-              name: "读书"
-            },
-            {
-              name: "记录"
-            },
-            {
-              name: "理解"
-            }
-          ]
-        },
-
-
-      ],
-      images: [
-        {
-          img: "/static/image/card1.jpg"
-        },
-        {
-          img: "/static/image/card2.jpg"
-        },
-        {
-          img: "/static/image/card3.jpg"
-        }
-      ]
+  data(){
+    return{
+      dialogFormVisible:false,
+        showNav:true
     }
   },
-  methods: {},
-  mounted() {
 
-  },
   created() {
     setTimeout(() => {
       window.L2Dwidget.init({
@@ -138,7 +73,21 @@ export default {
         log: false
       })
     }, 1000)
-  }
+  },
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll)
+    },
+    methods:{
+
+        handleScroll () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            if(scrollTop > 100){
+                this.showNav = true;
+            }else if(scrollTop < 100) {
+                this.showNav = false;
+            }
+        },
+    }
 }
 
 </script>
@@ -148,6 +97,11 @@ export default {
 *, html, body {
   margin: 0;
   padding: 0;
+}
+
+.zhezhao {
+  height: 200px;
+  width: 200px;
 }
 
 .zujian {
@@ -164,14 +118,16 @@ export default {
 .fd-head {
   width: 100%;
   height: 80px;
-  background: #fff;
+  background: white;
   box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
   display: flex;
   justify-content: center;
   position: fixed;
   z-index: 10;
 }
-
+.second{
+    background: #a8edea;
+}
 a {
   text-decoration: none;
 }
@@ -197,21 +153,17 @@ a {
   justify-content: center;
   align-items: center;
   margin-left: 15px;
+  font-weight: bold;
 }
 
 .logo-one {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
-
-.logo-one img {
-  height: 66px;
-  width: 66px;
-  border-radius: 33px;
+.logo-one img{
+  height: 60px;
 }
-
 
 .fd-logo-tile {
   flex: 1;
@@ -226,7 +178,9 @@ a {
   color: #2e3032;
   font-family: "Microsoft YaHei";
 }
-
+.wenzi span{
+    color: #fff;
+}
 .router-link-active span {
   color: coral;
 }
