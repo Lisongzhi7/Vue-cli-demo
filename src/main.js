@@ -8,6 +8,8 @@ import router from './router'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import VueParticles from 'vue-particles'
+import Api from './api/index.js'
+Vue.prototype.$api = Api
 Vue.use(VueParticles)
 Vue.use(ElementUI)
 AOS.init();
