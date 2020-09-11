@@ -21,8 +21,9 @@
                         </a>
                     </div>
                 </div>
-
-
+                 <div @click="isThree(3,4,5)">点我</div>
+                 <div @click="isThree(4,5,6)">点我</div>
+                {{res}}
             </div>
         </div>
 
@@ -34,6 +35,7 @@ export default {
     name: "Lianjie",
     data() {
         return {
+            res:'',
             list: [{
                 img: "/static/image/dalaoimg1.jpg",
                 name: "码酱",
@@ -88,15 +90,34 @@ export default {
         generateClassName(index) {
             return `fd-kapian${index + 1}`;
         },
+        isThree(a,b,c){
+            if ((a*a + b*b) == c*c) {
+                this.res= '该三个数能形成直角三角形，斜边长度为:' +c;
+                return
+            }
+          if ((a*a + c*c) == b*b) {
+              this.res= '该三个数能形成直角三角形，斜边长度为:' +b;
+              return
+          }
+          if ((c*c + b*b) == a*a) {
+              this.res= '该三个数能形成直角三角形，斜边长度为:' +a;
+              return
+          }
+            this.res= '该三角形不能形成'
+        },
         initList() {
             // 请求后台拿到文章列表
             // let list = [];
-            this.list = list;
+
         }
     },
     mounted() {
         this.initList();
-    }
+        let aaa=this.generateClassName(1);
+        console.log(aaa);
+    },
+
+
 }
 </script>
 

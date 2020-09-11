@@ -137,7 +137,6 @@ a {
   height: 100%;
   display: flex;
 }
-
 .fd-logo-box {
   height: 80px;
   width: 250px;
