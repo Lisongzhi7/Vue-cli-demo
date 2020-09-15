@@ -9,6 +9,7 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import VueParticles from 'vue-particles'
 import Api from './api/index.js'
+import '@/assets/icon/iconfont.css'
 Vue.prototype.$api = Api
 Vue.use(VueParticles)
 Vue.use(ElementUI)
