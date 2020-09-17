@@ -79,21 +79,21 @@
         <div class="jieshao-head">
           <div class="jieshao-a">
             <div class="jieshao-a_ch"></div>
-            <h2 class="title3">介绍</h2>
+            <h2 class="title3">我的旅游</h2>
             <div class="jieshao-a_en"></div>
           </div>
-          <span class="title-c">Introduce</span>
+          <span class="title-c">Travel</span>
         </div>
       </div>
       <div class="jieshao-center">
         <div class="jieshao-center_head">
           <div class="jieshao_a">
             <div class="jieshao_a_head">
-              <span>个人自我介绍</span>
+              <span>旅游地点</span>
               <div class="jieshao_a_xiahua"></div>
             </div>
             <div class="jieshao_a_center">
-              <span>热爱学习</span>
+              <span>青岛</span>
             </div>
             <div class="jieshao_a_bottom">
               <div class="jieshao_bottom">
@@ -112,15 +112,15 @@
           </div>
           <div class="jieshao_a">
             <div class="jieshao_a_head">
-              <span>个人自我介绍</span>
+              <span>旅游地点</span>
               <div class="jieshao_a_xiahua"></div>
             </div>
             <div class="jieshao_a_center">
-              <span>热爱学习</span>
+              <span>南京</span>
             </div>
             <div class="jieshao_a_bottom">
               <div class="jieshao_bottom">
-                <span>1、本人开朗大方，勤奋上进;富有感染力，表达能力与沟通能力强，善于学习和接受新事物;追求和谐，有团队合作精神。2、工作认真负责，有较强的敬业精神和责任心;专业知识扎实，能熟练运用预算软件、资料软件、办公软件;具有良好的施工现场管理经验及勾通协调能力。为人诚恳、工作敬业、吃苦耐劳、实战肯干型，付有超强团队合作精神。表达能力适应能力强逻辑思维清晰.</span>
+                <span>本人任职期间爱岗敬业，勤勉不懈。工作中细心严谨，踏实肯干，有较强的责任心和进取心。并密切配合上级及同事圆满完成了公司安排的其他工作和任务。在工作上极具团队精神，注重团队合作。具备独立自主完成工作的能力。在技能素质上能不断学习新知识，新技能，注重自身发展，以确保胜任当前工作。</span>
               </div>
             </div>
 
@@ -134,41 +134,90 @@
     </div>
     <!----------我的生活-------------->
     <div class="shenghuo-head">
-    <div class="shenghuo">
-      <div class="shenghuo-a">
-        <div class="shenghuo-center">
-          <div class="shenghuo_ch"></div>
-          <h2 class="title4">我的生活</h2>
-          <div class="shenghuo_en"></div>
+      <div class="shenghuo">
+        <div class="shenghuo-a">
+          <div class="shenghuo-center">
+            <div class="shenghuo_ch"></div>
+            <h2 class="title4">文章分类</h2>
+            <div class="shenghuo_en"></div>
+          </div>
+          <span class="title-d">Article</span>
         </div>
-        <span class="title-d">Excerpt</span>
       </div>
-    </div>
       <div class="shenghuo-a-head">
         <div class="shenghuo-center-a">
-          <div class="shenghuo-center-shang">
-            <el-button type="primary" round>家居行业</el-button>
-            <el-button type="success" round>教育行业</el-button>
-            <el-button type="info" round>机械行业</el-button>
-            <el-button type="warning" round>餐饮行业</el-button>
-          </div>
-
-
-          <div class="shenghuo-center-zhong">
-            <div v-for="(item,index) of shList" class="zhong-a">
-              <div class="zhong-a-head">
-                <img :src="item.img">
-              </div>
-              <div class="zhong-a-bottom">
-                <span>{{item.jianjie}}</span>
+          <div class="tuji">
+            <div class="tuji-a">
+              <el-radio-group v-model="radioButton" size="medium">
+                <el-radio-button :label="true">Vue学习笔记</el-radio-button>
+                <el-radio-button :label="false">JavaScript学习笔记</el-radio-button>
+              </el-radio-group>
+            </div>
+            <div v-show="radioButton">
+              <div class="shenghuo-center-zhong">
+                <div v-for="(item,index) of shList" class="zhong-a">
+                  <div class="zhong-a-head base">
+                    <img :src="item.img">
+                  </div>
+                  <div class="zhong-a-bottom">
+                    <span>{{item.jianjie}}</span>
+                  </div>
+                </div>
               </div>
             </div>
+            <div v-show="!radioButton">
+              <div class="shenghuo-center-you">
+                <div v-for="(item,index) of hsList" class="shenghuo-center-you">
+                  <div class="zhong-b">
+                    <div class="zhong-b-center base">
+                      <img :src="item.img2">
+                    </div>
+                    <div class="zhong-a-bottom-a">
+                      <span>{{item.jianjie2}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
           <div class="shenghuo-center-xia">
             <el-button round>查看更多</el-button>
           </div>
         </div>
 
+      </div>
+    </div>
+    <!----------新闻趣事--------------->
+    <div class="xinwen">
+      <div class="xinwen-head">
+        <div class="xinwen-a">
+          <div class="xinwen-center">
+            <div class="xinwen_ch"></div>
+            <h2 class="title5">最新文章</h2>
+            <div class="xinwen_en"></div>
+          </div>
+          <span class="title-e">Newest</span>
+        </div>
+      </div>
+      <div v-for="(item,index) of xwList" class="xinwen-center-shang">
+        <div class="xinwen-shang-zuo">
+          <img :src="item.xwImg">
+        </div>
+        <div class="xinwen-shang-you">
+          <div class="xinwen-shang">
+            <span>{{item.xwname}}</span>
+          </div>
+          <div class="xinwen-zhong">
+            <span>{{item.xwtitle}}</span>
+          </div>
+          <div class="xinwen-xia">
+            <el-button size="small" round>查看更多</el-button>
+          </div>
+        </div>
+      </div>
+      <div class="xinwen-bottom">
+        <el-button round>查看更多</el-button>
       </div>
     </div>
   </div>
@@ -219,15 +268,39 @@
           image: 'http://xlsb.luokangyuan.com/16.jpg',
           desc: '人生如一本书，应该多一些精彩的细节，少一些乏味的字眼；人生如一支歌，应该多一些昂扬的旋律，少一些忧伤的音符；人生如一幅画，应该多一些亮丽的色彩，少一些灰暗的色调。'
         },],
-        shList:[{
-          img:'http://xlsb.luokangyuan.com/18.jpg',
-          jianjie:'青于蓝企业网站模板'
+        radioButton: true,
+        shList: [{
+          img: 'http://xlsb.luokangyuan.com/7.jpg',
+          jianjie: '读书破万卷，下笔如有神'
+        }, {
+          img: 'http://xlsb.luokangyuan.com/8.jpg',
+          jianjie: '为政以德，譬如北辰，居其所而众星共之'
+        }, {
+          img: 'http://xlsb.luokangyuan.com/9.jpg',
+          jianjie: '温故而知新，可以为师矣'
+        },],
+        hsList: [{
+          img2: 'http://xlsb.luokangyuan.com/10.jpg',
+          jianjie2: '君子周而不比，小人比而不周'
+        }, {
+          img2: 'http://xlsb.luokangyuan.com/a3.jpg',
+          jianjie2: '学而不思则罔，思而不学则殆'
+        }, {
+          img2: 'http://xlsb.luokangyuan.com/a2.jpg',
+          jianjie2: '攻乎异端，斯害也已'
+        },],
+        xwList:[{
+          xwImg:'http://xlsb.luokangyuan.com/21.jpg',
+          xwname:'如何提升企业网站价值，企业建站过程应该注意什么？',
+          xwtitle:'互联网的发展，无论是企业或个人，都会选择通往互联网的捷径，以发展企业文化或推广产品概念。面对日益发达的互联网社会，大多数企业开始重视网站，并开始加大对网站搭建的投入，采用多渠道的网络推广形式来推广自己的品牌企业文化，以吸引更多的用户流量，促进流量的转换。'
         },{
-          img:'http://xlsb.luokangyuan.com/18.jpg',
-          jianjie:'青于蓝企业网站模板'
+          xwImg:'http://xlsb.luokangyuan.com/22.jpg',
+          xwname:'如何提升企业网站价值，企业建站过程应该注意什么？',
+          xwtitle:'互联网的发展，无论是企业或个人，都会选择通往互联网的捷径，以发展企业文化或推广产品概念。面对日益发达的互联网社会，大多数企业开始重视网站，并开始加大对网站搭建的投入，采用多渠道的网络推广形式来推广自己的品牌企业文化，以吸引更多的用户流量，促进流量的转换。'
         },{
-          img:'http://xlsb.luokangyuan.com/18.jpg',
-          jianjie:'青于蓝企业网站模板'
+          xwImg:'http://xlsb.luokangyuan.com/23.jpg',
+          xwname:'如何提升企业网站价值，企业建站过程应该注意什么？',
+          xwtitle:'互联网的发展，无论是企业或个人，都会选择通往互联网的捷径，以发展企业文化或推广产品概念。面对日益发达的互联网社会，大多数企业开始重视网站，并开始加大对网站搭建的投入，采用多渠道的网络推广形式来推广自己的品牌企业文化，以吸引更多的用户流量，促进流量的转换。'
         },]
       }
     }
@@ -254,7 +327,7 @@
     height: 600px;
     width: 100%;
     box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
-    margin-top: 90px;
+    margin-top: 55px;
   }
 
   .home-head img {
@@ -346,9 +419,10 @@
     cursor: pointer;
   }
 
-  .center-center-zuo:hover img{
+  .center-center-zuo:hover img {
     transform: scale(1.1);
   }
+
   .center-center-zuo img {
     transition: all .5s;
   }
@@ -549,8 +623,6 @@
     display: table-cell;
     position: relative;
     transition: opacity .25s ease-in-out, background .25s ease-in-out;
-    -moz-transition: opacity .25s ease-in-out, background .25s ease-in-out;
-    -webkit-transition: opacity .25s ease-in-out, background .25s ease-in-out;
     vertical-align: middle;
     z-index: 1;
     color: #fff;
@@ -695,52 +767,50 @@
     width: 472px;
     overflow: hidden;
   }
+
   .jieshao-center_head:hover {
     cursor: pointer;
   }
+
   .jieshao_b img {
     width: 472px;
     height: 400px;
     transform: scale(1.0, 1.0);
-    -ms-transform: scale(1.0, 1.0);
-    -moz-transform: scale(1.0, 1.0);
-    -webkit-transform: scale(1.0, 1.0);
-    -o-transform: scale(1.0, 1.0);
-    -webkit-transition: transform 0.7s ease;
     transition: transform 0.7s ease;
   }
-  .jieshao_b img:hover{
-    transform: scale(1.05,1.05);
-    -ms-transform:scale(1.05,1.05);
-    -webkit-transform:scale(1.05,1.05);
-    -o-transform:scale(1.05,1.05);
-    -webkit-transition: transform 0.7s ease;
+
+  .jieshao_b img:hover {
+    transform: scale(1.1, 1.1);
     transition: transform 0.7s ease;
   }
-  .jieshao-center_center{
+
+  .jieshao-center_center {
     height: 60px;
     margin-top: 30px;
   }
-  .shenghuo-head{
+
+  .shenghuo-head {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
   }
-  .shenghuo{
+
+  .shenghuo {
     height: 100px;
     width: 1300px;
     margin-top: 50px;
-    background: #3a8ee6;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .shenghuo-center {
     display: flex;
     align-items: center;
   }
+
   .title4 {
     font-size: 28px;
   }
@@ -750,6 +820,7 @@
     display: flex;
     justify-content: center;
   }
+
   .shenghuo_ch {
     height: 1px;
     width: 100px;
@@ -765,59 +836,248 @@
     margin-left: 30px;
     margin-top: 30px;
   }
-  .shenghuo-a-head{
+
+  .shenghuo-a-head {
     height: 500px;
     width: 1300px;
-    background: #6b778d;
     display: flex;
     justify-content: center;
   }
-  .shenghuo-center-a{
+
+  .shenghuo-center-a {
     height: 500px;
     width: 944px;
-    background: #8cc5ff;
   }
-  .shenghuo-center-shang{
+
+  .shenghuo-center-shang {
     height: 120px;
-    background: #5daf34;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .shenghuo-center-zhong{
+
+  .shenghuo-center-zhong {
     height: 260px;
-    background: #a8edea;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  .zhong-a{
+
+  .zhong-a {
     height: 240px;
     width: 300px;
-    background: #9a6e3a;
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
   }
-  .zhong-a-head{
+  .zhong-a:hover{
+    cursor: pointer;
+  }
+
+  .zhong-a-head {
     height: 190px;
-    background: #0077aa;
   }
-  .zhong-a-head img{
+
+  .zhong-a-head img {
+    height: 190px;
+    width: 300px;
+  }
+
+  .zhong-a-bottom {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .zhong-a-bottom span {
+    font-size: 14px;
+  }
+
+  .shenghuo-center-you {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .zhong-b {
+    height: 240px;
+    width: 300px;
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+  }
+
+  .zhong-b-center {
     height: 190px;
   }
-.zhong-a-bottom{
-  height: 50px;
-  background: #5daf34;
+
+  .zhong-b-center img {
+    width: 300px;
+  }
+
+  .zhong-b-center img {
+    height: 190px;
+  }
+
+  .zhong-a-bottom-a {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .zhong-a-bottom-a span {
+    font-size: 14px;
+  }
+
+  .tuji-a {
+    height: 60px;
+    width: 944px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .base {
+    overflow: hidden;
+
+  }
+
+  .base img {
+    height: 190px;
+    width: 300px;
+    transform: scale(1.0, 1.0);
+    -ms-transform: scale(1.0, 1.0);
+    -moz-transform: scale(1.0, 1.0);
+    -webkit-transform: scale(1.0, 1.0);
+    -o-transform: scale(1.0, 1.0);
+    -webkit-transition: transform 0.7s ease;
+    transition: transform 0.7s ease;
+  }
+
+  .base img:hover {
+    transform: scale(1.1, 1.1);
+    -ms-transform: scale(1.1, 1.1);
+    -webkit-transform: scale(1.1, 1.1);
+    -o-transform: scale(1.1, 1.1);
+    -webkit-transition: transform 0.7s ease;
+    transition: transform 0.7s ease;
+  }
+
+  .shenghuo-center-xia {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .xinwen{
+    height: 1000px;
+    width: 100%;
+    background: #dadada;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .xinwen-head{
+    height: 100px;
+    width: 1300px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.xinwen-center{
   display: flex;
   align-items: center;
-  justify-content: center;
 }
-.zhong-a-bottom span{
-  font-size: 14px;
-}
+  .title5 {
+    font-size: 28px;
+  }
 
+  .title-e {
+    color: #666;
+    display: flex;
+    justify-content: center;
+  }
 
-  .shenghuo-center-xia{
-    height: 120px;
-    background: #0077aa;
+  .xinwen_ch {
+    height: 1px;
+    width: 100px;
+    background: #000;
+    margin-right: 30px;
+    margin-top: 30px;
+  }
+
+  .xinwen_en {
+    height: 1px;
+    width: 100px;
+    background: #000;
+    margin-left: 30px;
+    margin-top: 30px;
+  }
+  .xinwen-center-shang{
+    height: 210px;
+    width: 944px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+  }
+  .xinwen-center-shang:hover{
+    cursor: pointer;
+  }
+  .xinwen-shang-zuo{
+    height: 180px;
+    width: 310px;
+    overflow: hidden;
+  }
+  .xinwen-shang-zuo img:hover{
+    transform: scale(1.1,1.1);
+    transition: transform 0.7s ease;
+  }
+  .xinwen-shang-zuo img{
+    height: 180px;
+    width: 310px;
+    transform: scale(1.0, 1.0);
+    transition: transform 0.7s ease;
+  }
+  .xinwen-shang-you{
+    height: 180px;
+    width: 574px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .xinwen-shang{
+    height: 40px;
+    width: 574px;
+  }
+  .xinwen-shang span{
+    font-size: 16px;
+  }
+  .xinwen-zhong{
+    height: 80px;
+    width: 574px;
+  }
+  .xinwen-zhong span{
+    font-size: 10px;
+    color: #666;
+  }
+  .xinwen-xia{
+    height: 60px;
+    width: 574px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .xinwen-bottom{
+    width: 944px;
+    height: 50px;
+    margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;

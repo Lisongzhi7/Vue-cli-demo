@@ -10,8 +10,11 @@ import 'aos/dist/aos.css'
 import VueParticles from 'vue-particles'
 import Api from './api/index.js'
 import '@/assets/icon/iconfont.css'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 Vue.prototype.$api = Api
 Vue.use(VueParticles)
+Vue.use(mavonEditor)
 Vue.use(ElementUI)
 AOS.init();
 Vue.config.productionTip = false

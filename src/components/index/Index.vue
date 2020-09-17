@@ -15,12 +15,22 @@
                     <span @click="dialogFormVisible = true"><i class="el-icon-search"></i></span>
                 </div>
             </div>
-            <el-dialog  :modal-append-to-body="false" :show-close="false"  title="搜索" :visible.sync="dialogFormVisible">
-                <div class="zhezhao"></div>
-            </el-dialog>
+<!--            <el-dialog  :modal-append-to-body="false" :show-close="false" :visible.sync="dialogFormVisible">-->
+<!--                <div class="zhezhao"></div>-->
+<!--            </el-dialog>-->
         </div>
         <a href="javascript:" id="return_top" title="回到顶部"><i class="iconfont icon-hiiniconhuidaodingbu201"></i></a>
         <div class="fd-center">
+<!--          <div class="home-head">-->
+<!--            <el-carousel :interval="5000" arrow="always" height="600px">-->
+<!--              <el-carousel-item v-for="(item,index) of imglist">-->
+<!--                <img :src="item">-->
+<!--              </el-carousel-item>-->
+<!--            </el-carousel>-->
+<!--          </div>-->
+
+
+
             <router-view></router-view>
         </div>
         <div class="fd-bottom">
@@ -32,6 +42,17 @@
 <script>
 export default {
     name: "Index",
+  data(){
+    return {
+      // imglist: [
+      //   "http://xlsb.luokangyuan.com/a5.jpg",
+      //   "http://xlsb.luokangyuan.com/8.jpg",
+      //   "http://xlsb.luokangyuan.com/a3.jpg",
+      //   "http://xlsb.luokangyuan.com/20.jpg"
+      // ],
+    }
+  },
+
     //      回到顶部效果
    vra: window.onload = function(){
         var obtn = document.getElementById('return_top');  //获取回到顶部按钮的ID
@@ -70,9 +91,52 @@ export default {
                     clearInterval(timer);
                 }
             },30);
-        }
+        };
+     (function(){
+       var a_idx = 0;
+       window.onclick = function(event){
+         var a = new Array("❤富强❤","❤民主❤","❤文明❤","❤和谐❤","❤自由❤","❤平等❤","❤公正❤","❤法治❤","❤爱国❤","❤敬业❤","❤诚信❤","❤友善❤");
+
+         var heart = document.createElement("b");	//创建b元素
+         heart.onselectstart = new Function('event.returnValue=false');	//防止拖动
+
+         document.body.appendChild(heart).innerHTML = a[a_idx];		//将b元素添加到页面上
+         a_idx = (a_idx + 1) % a.length;
+         heart.style.cssText = "position: fixed;left:-100%;";	//给p元素设置样式
+
+         var f = 16, 	// 字体大小
+           x = event.clientX - f / 2, // 横坐标
+           y = event.clientY - f, // 纵坐标
+           c = randomColor(),  // 随机颜色
+           a = 1, 				// 透明度
+           s = 1.2; 			// 放大缩小
+
+         var timer = setInterval(function(){		//添加定时器
+           if(a <= 0){
+             document.body.removeChild(heart);
+             clearInterval(timer);
+           }else{
+             heart.style.cssText = "font-size:16px;cursor: default;position: fixed;color:" + c + ";left:" + x + "px;top:" + y + "px;opacity:" + a + ";transform:scale(" + s + ");";
+
+             y--;
+             a -= 0.016;
+             s += 0.002;
+           }
+         },15)
+
+       }
+       // 随机颜色
+       function randomColor() {
+
+         return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")";
+
+       }
+     }());
+
     }
+
 }
+
 </script>
 
 <style scoped>
@@ -80,7 +144,7 @@ export default {
     position:fixed;
     right:25px;
     bottom:60px;
-    display:none;
+    display:flex;
 }
 .iconfont{
     font-size: 70px;
@@ -89,4 +153,5 @@ export default {
     height: 50px;
     border-radius: 30px;
 }
+
 </style>

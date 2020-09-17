@@ -7,6 +7,8 @@ import Lianjie from '@/components/lianjie/Lianjie'
 import guanyuwo from '@/components/guanyuwo/guanyuwo'
 import Index from '@/components/index/Index'
 import Admin from '@/components/admin/Admin'
+import Article from '@/components/article/Article'
+import Create from '@/components/create/Create'
 
 Vue.use(Router)
 
@@ -48,7 +50,19 @@ export default new Router({
     {
       path: '/admin',
       name: 'Admin',
-      component: Admin
+      component: Admin,
+      children: [
+        {
+          path: '/article',
+          name: 'Article',
+          component: Article
+        },{
+          path: '/create',
+          name: 'Create',
+          component: Create
+        },
+
+      ],
     }
 
 
