@@ -75,6 +75,9 @@
           </article>
         </div>
       </div>
+      <div class="center-xia">
+        <el-button round>查看更多</el-button>
+      </div>
       <div class="jieshao">
         <div class="jieshao-head">
           <div class="jieshao-a">
@@ -229,10 +232,10 @@
     data() {
       return {
         imglist: [
+          "http://xlsb.luokangyuan.com/37.jpg",
+          "http://xlsb.luokangyuan.com/34.jpg",
           "http://xlsb.luokangyuan.com/a5.jpg",
-          "http://xlsb.luokangyuan.com/8.jpg",
-          "http://xlsb.luokangyuan.com/a3.jpg",
-          "http://xlsb.luokangyuan.com/11.jpg"
+          "http://xlsb.luokangyuan.com/32.jpg"
         ],
         list: [{
           icon: 'iconfont icon-shumu1',
@@ -570,7 +573,13 @@
     justify-content: center;
 
   }
-
+.center-xia{
+  height: 80px;
+  width: 944px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
   #content article {
     float: left;
     /*margin-right: 4%;*/

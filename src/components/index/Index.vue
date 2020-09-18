@@ -7,17 +7,17 @@
                     <span class="boke">My blog site</span>
                 </div>
                 <div class="fd-logo-tile">
-                    <router-link to="/home"><span>博客首页</span></router-link>
-                    <router-link to="/category"><span>文章分类</span></router-link>
-                    <router-link to="/guidang"><span>文章归档</span></router-link>
-                    <router-link to="/lianjie"><span>友情链接</span></router-link>
+                    <router-link to="/home"><span>网站首页</span></router-link>
+                  <router-link to="/guidang"><span>博客日记</span></router-link>
+                  <router-link to="/lianjie"><span>碎言碎语</span></router-link>
+                  <router-link to="/category"><span>时间轴</span></router-link>
                     <router-link to="/guanyuwo"><span>关于我</span></router-link>
-                    <span @click="dialogFormVisible = true"><i class="el-icon-search"></i></span>
+                    <span @click="dialogFormVisible = true"><i class="iconfont icon-sousuo"></i></span>
                 </div>
             </div>
-<!--            <el-dialog  :modal-append-to-body="false" :show-close="false" :visible.sync="dialogFormVisible">-->
-<!--                <div class="zhezhao"></div>-->
-<!--            </el-dialog>-->
+            <el-dialog  :modal-append-to-body="false" :show-close="false" :visible.sync="dialogFormVisible">
+                <div class="zhezhao"><span>搜索</span></div>
+            </el-dialog>
         </div>
         <a href="javascript:" id="return_top" title="回到顶部"><i class="iconfont icon-hiiniconhuidaodingbu201"></i></a>
         <div class="fd-center">
@@ -50,6 +50,8 @@ export default {
       //   "http://xlsb.luokangyuan.com/a3.jpg",
       //   "http://xlsb.luokangyuan.com/20.jpg"
       // ],
+      dialogFormVisible: false,
+      showNav: true
     }
   },
 
@@ -153,5 +155,13 @@ export default {
     height: 50px;
     border-radius: 30px;
 }
-
+  .fd-logo-tile i{
+    font-size: 18px;
+  }
+.zhezhao span{
+  font-size: 18px;
+}
+  .fd-logo-tile i:hover{
+    cursor: pointer;
+  }
 </style>
