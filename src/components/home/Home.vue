@@ -4,7 +4,7 @@
     <div class="home-head">
       <el-carousel :interval="5000" arrow="always" height="600px">
         <el-carousel-item v-for="(item,index) of imglist">
-          <img :src="item">
+          <img :src="item.url">
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -20,25 +20,19 @@
       </div>
       <div class="center-center">
         <div class="center-center-zuo">
-          <img src="http://xlsb.luokangyuan.com/11.jpg">
+          <img :src="about.url">
         </div>
         <div class="center-center-you">
           <div class="you-head">
-                    <span>
-                        我珍惜每个评论过我的人，正因不会有人闲得蛋疼,去在乎你的情绪。性命即使没有轰轰烈烈也无后人之仰慕，
-                        却无不让人感到一种生存的神圣与尊严。咱们乐为平凡之辈而不落于平庸之流，咱们不甘受辱，咱们不会沉沦，
-                        咱们平凡生命，才知道平凡的情感事业人生境界里，原来有那么多姿多彩，灿烂绚丽。
-                    </span>
+                    <span>{{about.introduction}}</span>
           </div>
           <div class="you-center">
-                    <span>
-                        做自己的太阳，给自己一个微笑，今天会比昨天更好！
-                    </span>
+                    <span>{{about.describeInfo}}</span>
           </div>
         </div>
       </div>
       <div class="center-bottom">
-        <el-button round>查看更多</el-button>
+        <el-button round @click="gotoAbout">查看更多</el-button>
       </div>
       <div class="center-icon">
         <div v-for="(item,index) of list" class="icon-a">
@@ -66,17 +60,17 @@
           <article
             class="post-152 post type-post status-publish format-standard hentry category-people category-photos">
             <div class="post-format-content">
-              <div class="post-thumbnail"><img width="480" height="640" :src="item.image"
+              <div class="post-thumbnail"><img width="480" height="640" :src="item.url"
                                                class="attachment-thumbnail wp-post-image" alt="105694702"></div>
               <div class="content-wrap">
-                <p class="entry-title"><a href="" class="featured-image" rel="bookmark">{{item.desc}}</a></p>
+                <p class="entry-title"><a href="" class="featured-image" rel="bookmark">{{item.name}}</a></p>
               </div>
             </div>
           </article>
         </div>
       </div>
       <div class="center-xia">
-        <el-button round>查看更多</el-button>
+        <el-button round @click="gotoFamousAphorism">查看更多</el-button>
       </div>
       <div class="jieshao">
         <div class="jieshao-head">
@@ -89,46 +83,24 @@
         </div>
       </div>
       <div class="jieshao-center">
-        <div class="jieshao-center_head">
+        <div v-for="(item,index) of traveList" class="jieshao-center_head" :class="rowClass(index)">
           <div class="jieshao_a">
             <div class="jieshao_a_head">
               <span>旅游地点</span>
               <div class="jieshao_a_xiahua"></div>
             </div>
             <div class="jieshao_a_center">
-              <span>青岛</span>
+              <span>{{item.address}}</span>
             </div>
             <div class="jieshao_a_bottom">
               <div class="jieshao_bottom">
-                <span>1、本人开朗大方，勤奋上进;富有感染力，表达能力与沟通能力强，善于学习和接受新事物;追求和谐，有团队合作精神。2、工作认真负责，有较强的敬业精神和责任心;专业知识扎实，能熟练运用预算软件、资料软件、办公软件;具有良好的施工现场管理经验及勾通协调能力。为人诚恳、工作敬业、吃苦耐劳、实战肯干型，付有超强团队合作精神。表达能力适应能力强逻辑思维清晰.</span>
+                <span>{{item.descInfo}}</span>
               </div>
             </div>
-
           </div>
           <div class="jieshao_b">
-            <img src="http://xlsb.luokangyuan.com/17.jpg">
+            <img :src="item.url">
           </div>
-        </div>
-        <div class="jieshao-center_head">
-          <div class="jieshao_b">
-            <img src="http://xlsb.luokangyuan.com/19.jpg">
-          </div>
-          <div class="jieshao_a">
-            <div class="jieshao_a_head">
-              <span>旅游地点</span>
-              <div class="jieshao_a_xiahua"></div>
-            </div>
-            <div class="jieshao_a_center">
-              <span>南京</span>
-            </div>
-            <div class="jieshao_a_bottom">
-              <div class="jieshao_bottom">
-                <span>本人任职期间爱岗敬业，勤勉不懈。工作中细心严谨，踏实肯干，有较强的责任心和进取心。并密切配合上级及同事圆满完成了公司安排的其他工作和任务。在工作上极具团队精神，注重团队合作。具备独立自主完成工作的能力。在技能素质上能不断学习新知识，新技能，注重自身发展，以确保胜任当前工作。</span>
-              </div>
-            </div>
-
-          </div>
-
         </div>
       </div>
       <div class="jieshao-center_center">
@@ -231,12 +203,9 @@
     name: "Home",
     data() {
       return {
-        imglist: [
-          "http://xlsb.luokangyuan.com/37.jpg",
-          "http://xlsb.luokangyuan.com/34.jpg",
-          "http://xlsb.luokangyuan.com/a5.jpg",
-          "http://xlsb.luokangyuan.com/32.jpg"
-        ],
+        traveList:[],
+        imglist: [],
+        about:{},
         list: [{
           icon: 'iconfont icon-shumu1',
           name: '专业特长',
@@ -258,19 +227,7 @@
           title: '前端工程师',
           desc: '制定目标，勇往直前'
         },],
-        List: [{
-          image: 'http://xlsb.luokangyuan.com/13.jpg',
-          desc: '人生是美好的，又是短暂的。有的人生寂寞，有的人生多彩，不同的人有着不同的人生追求；人生是一条没有回程的单行线，每个人都用自己的所有时光前行。'
-        }, {
-          image: 'http://xlsb.luokangyuan.com/14.jpg',
-          desc: '生活，就是面对现实微笑，就是越过障碍注视未来；生活，就是用心灵之剪，在人生之路上裁出叶绿的枝头；生活，就是面对困惑或黑暗时，灵魂深处燃起豆大却明亮且微笑的灯展。'
-        }, {
-          image: 'http://xlsb.luokangyuan.com/15.jpg',
-          desc: '成熟是一种明亮而不刺眼的光辉，一种圆润而不腻耳的音响，一种不需要对别人察颜观色的从容，一种终于停止了向周围申诉求告的大气，一种不理会哄闹的微笑，一种洗刷了偏激的淡漠，一种无须声张的厚实，一种并不陡峭的高度。'
-        }, {
-          image: 'http://xlsb.luokangyuan.com/16.jpg',
-          desc: '人生如一本书，应该多一些精彩的细节，少一些乏味的字眼；人生如一支歌，应该多一些昂扬的旋律，少一些忧伤的音符；人生如一幅画，应该多一些亮丽的色彩，少一些灰暗的色调。'
-        },],
+        List: [],
         radioButton: true,
         shList: [{
           img: 'http://xlsb.luokangyuan.com/7.jpg',
@@ -306,6 +263,54 @@
           xwtitle:'互联网的发展，无论是企业或个人，都会选择通往互联网的捷径，以发展企业文化或推广产品概念。面对日益发达的互联网社会，大多数企业开始重视网站，并开始加大对网站搭建的投入，采用多渠道的网络推广形式来推广自己的品牌企业文化，以吸引更多的用户流量，促进流量的转换。'
         },]
       }
+    },
+    methods:{
+      rowClass(index){
+        if(index == 1){
+          return 'row-convter';
+        }
+      },
+      getBook(){
+        this.$api.get(`/api/v1/book/index`,null, (res) => {
+          if (res) {
+              this.List = res.data;
+          }
+        })
+      },
+      gotoAbout(){
+        this.$router.push({path:"/guanyuwo"})
+      },
+      gotoFamousAphorism(){
+        this.$router.push({path:"/famousAphorism"})
+      },
+      getList(){
+        this.$api.get(`/api/v1/carouse/index`,null, (res) => {
+          if (res) {
+           this.imglist = res.data;
+          }
+        })
+      },
+      getAbout(){
+        this.$api.get(`/api/v1/about`,null, (res) => {
+          if (res) {
+            this.about = res.data
+          }
+        })
+      },
+      getTrave(){
+        this.$api.get(`/api/v1/travel/index`,null, (res) => {
+          if (res) {
+            this.traveList = res.data
+          }
+        })
+      }
+
+    },
+    mounted() {
+      this.getList();
+      this.getAbout();
+      this.getBook();
+      this.getTrave();
     }
 
   }
@@ -1090,5 +1095,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .row-convter{
+    flex-direction: row-reverse;
   }
 </style>

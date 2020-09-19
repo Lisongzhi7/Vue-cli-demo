@@ -24,10 +24,10 @@
     </span>
       </div>
       <div v-show="radioButton" class="guanyuwo-zhong-a">
-        <div class="zhong-a">
+        <div class="zhong-aa">
           <span>我的个人博客</span>
         </div>
-        <div class="zhong-b">
+        <div class="zhong-bb">
           <span>从一开始的无从下手，毫无思绪，慢慢了解，慢慢进步，我相信，终会在雨后遇见彩虹的</span>
         </div>
         <div class="zhong-c">
@@ -196,7 +196,7 @@ export default {
   width: 944px;
 }
 
-.zhong-a {
+.zhong-aa {
   height: 70px;
   width: 944px;
   font-size: 24px;
@@ -204,7 +204,7 @@ export default {
   margin-top: 30px;
 }
 
-.zhong-b {
+.zhong-bb {
   height: 70px;
   width: 944px;
   font-family: Alibaba-PuHuiTi-Regular;

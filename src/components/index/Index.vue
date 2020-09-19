@@ -164,4 +164,8 @@ export default {
   .fd-logo-tile i:hover{
     cursor: pointer;
   }
+  .iconfont{
+    color: cadetblue;
+  }
+
 </style>

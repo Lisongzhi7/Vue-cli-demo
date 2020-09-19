@@ -168,7 +168,10 @@ export default {
       var r = Math.floor(Math.random() * 256);
       var g = Math.floor(Math.random() * 256);
       var b = Math.floor(Math.random() * 256);
-      var color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+      let r1 = r.toString(16).length == 1 ? '0' + r.toString(16) : r.toString(16);
+      let g1 = g.toString(16).length == 1 ? '0' + g.toString(16) : g.toString(16);
+      let b1 = b.toString(16).length == 1 ? '0' + b.toString(16) : b.toString(16);
+      var color = '#' + r1 + g1 + b1;
       return color;
     },
   }

@@ -1,19 +1,19 @@
 import axios from 'axios'
 let http = axios.create({
-    baseURL: 'http://luokangyuan.com:8852/',
+    baseURL: 'http://192.168.31.232:8852/',
     withCredentials: false,
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8'
     },
-    transformRequest: [function (data) {
-        let newData = '';
-        for (let k in data) {
-            if (data.hasOwnProperty(k) === true) {
-                newData += encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&';
-            }
-        }
-        return newData;
-    }]
+    // transformRequest: [function (data) {
+    //     let newData = '';
+    //     for (let k in data) {
+    //         if (data.hasOwnProperty(k) === true) {
+    //             newData += encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&';
+    //         }
+    //     }
+    //     return newData;
+    // }]
 });
 
 function apiAxios(method, url, params, response) {

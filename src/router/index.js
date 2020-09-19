@@ -17,6 +17,9 @@ import Diary from '@/components/diary/Diary'
 import Record from '@/components/record/Record'
 import TimerShaft from '@/components/timerShaft/TimerShaft'
 import AboutMe from '@/components/aboutMe/AboutMe'
+import Carousel from '@/components/carousel/Carousel'
+import ArticleManagement from '@/components/articleManagement/ArticleManagement'
+import FamousAphorism from '@/components/famousAphorism/FamousAphorism'
 
 Vue.use(Router)
 
@@ -51,7 +54,12 @@ export default new Router({
           path:'/guanyuwo',
           name:'guanyuwo',
           component: guanyuwo
-        }
+        },
+        {
+          path: '/famousAphorism',
+          name: 'FamousAphorism',
+          component: FamousAphorism
+        },
       ],
       redirect: '/home'
     },
@@ -100,6 +108,14 @@ export default new Router({
           path: '/aboutMe',
           name: 'AboutMe',
           component: AboutMe
+        },{
+          path: '/carousel',
+          name: 'Carousel',
+          component: Carousel
+        },{
+          path: '/articleManagement',
+          name: 'ArticleManagement',
+          component: ArticleManagement
         },
 
       ],
