@@ -3,51 +3,48 @@
   <div class="fd-nav" >
     <div class="gljm">
       <img src="http://xlsb.luokangyuan.com/1.jpg"/>
-      <span>木子李的管理界面</span>
+      <span>创建文章</span>
     </div>
     <div  @click="openArticle" class="fd-fabu"><span>发布</span></div>
   </div>
 
-  <el-dialog title="提交发布" :visible.sync="dialogFormVisible">
-    <el-form :model="article">
-      <el-form-item label="名称" :label-width="formLabelWidth">
-        <el-input v-model="article.name" autocomplete="off"></el-input>
+  <el-form ref="form" :model="article" label-width="80px">
+    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+
+      <el-form-item label="名称">
+        <el-input v-model="article.name"></el-input>
       </el-form-item>
-      <el-form-item label="配图地址" :label-width="formLabelWidth">
-        <el-input v-model="article.image" autocomplete="off"></el-input>
+      <el-form-item label="配图地址">
+        <el-input v-model="article.image"></el-input>
       </el-form-item>
-      <el-form-item label="描述信息" :label-width="formLabelWidth">
-        <el-input v-model="article.descInfo" autocomplete="off"></el-input>
+      <el-form-item label="描述信息">
+        <el-input v-model="article.descInfo"></el-input>
       </el-form-item>
-      <el-form-item label="作者名称" :label-width="formLabelWidth">
-        <el-input v-model="article.author" autocomplete="off"></el-input>
+      <el-form-item label="作者名称">
+        <el-input v-model="article.author"></el-input>
       </el-form-item>
-      <el-form-item label="观看次数" :label-width="formLabelWidth">
-        <el-input v-model="article.view" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="喜欢次数" :label-width="formLabelWidth">
-        <el-input v-model="article.likeNum" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="文章内容" :label-width="formLabelWidth">
-        <el-input v-model="article.content" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="分类名称" :label-width="formLabelWidth">
-        <el-input v-model="article.classifyStr" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="文章标签" :label-width="formLabelWidth">
-        <el-select v-model="labelStr.region" placeholder="文章标签">
-          <el-option label="区域一" value="Web"></el-option>
-          <el-option label="区域二" value="Vue"></el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click="saveArticle">确 定</el-button>
-    </div>
-  </el-dialog>
+      <el-form-item @click="getClassify" label="分类名称">
+      <el-select v-model="article.classifyId" placeholder="请选择分类名称">
+        <el-option v-for="(item,index) of classifyId" :label="item.name" :value="item.id"></el-option>
+      </el-select>
+    </el-form-item>
+      <el-form-item @click="getLabelStr" label="文章标签">
+      <el-select v-model="article.labelStr" multiple
+                 filterable
+                 allow-create
+                 default-first-option  placeholder="请选择文章标签">
+        <el-option v-for="(item,index) of labelStr" :key="item.value" :label="item.name" :value="item.id"></el-option>
+      </el-select>
+    </el-form-item>
+
+    <el-form-item>
+      <el-button type="primary" @click="saveArticle">立即创建</el-button>
+      <el-button @click="dialogFormVisible = false">取消</el-button>
+    </el-form-item>
+    </el-dialog>
+  </el-form>
   <div class="fd-content">
-    <mavon-editor v-model="content"/>
+    <mavon-editor v-model="article.content"/>
   </div>
 
 </div>
@@ -63,27 +60,26 @@
           return{
             content:'# your markdown content',
             dialogFormVisible: false,
+            labelStr: [],
+            classifyId:[],
+            value: [],
             article: {
               name: '',
-              image: '',
+              image:'',
               descInfo:'',
               author:'',
-              view:'',
-              likeNum:'',
               content:'',
-              classifyStr:''
-            },
-            labelStr: {
-              user: '',
-              region: ''
+
             }
           }
     },
     methods:{
       openArticle(){
         this.dialogFormVisible = true;
+
       },
       saveArticle(){
+        console.log(this.article)
         this.$api.post(`/api/v1/blog`,this.article, (res) => {
           if (res) {
 
@@ -95,9 +91,24 @@
 
           }
         })
+      },
+      getLabelStr(){
+        this.$api.post(`/api/v1/blog`,this.labelStr, (res) => {
+          if (res) {
+              this.labelStr = res.data;
+          }
+        })
+      },
+      getClassify(){
+        this.$api.get(`/api/v1/classify`,null, (res) => {
+          if (res) {
+              this.classifyId = res.data;
+          }
+        })
       }
     },
     mounted() {
+      this.getClassify();
     }
   }
 </script>

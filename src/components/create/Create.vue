@@ -16,6 +16,7 @@
             prop="createTimeStr"
             label="创建日期">
           </el-table-column>
+
           <el-table-column
             align="center"
             prop="name"

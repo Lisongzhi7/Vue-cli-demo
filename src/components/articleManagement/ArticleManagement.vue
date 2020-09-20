@@ -8,13 +8,8 @@
     </div>
     <div class="bottom">
       <el-table
-        :data="articleManagement"
-        style="width: 100%">
-        <el-table-column
-          align="center"
-          prop="timestamp"
-          label="创建日期">
-        </el-table-column>
+        :data="articleManagementData">
+
         <el-table-column
           align="center"
           prop="name"
@@ -27,13 +22,18 @@
         </el-table-column>
         <el-table-column
           align="center"
-          prop="desc"
+          prop="descInfo"
           label="文章描述">
         </el-table-column>
         <el-table-column
           align="center"
-          prop="limit"
-          label="文章数量">
+          prop="image"
+          label="图片地址">
+        </el-table-column>
+        <el-table-column
+          align="center"
+          prop="view"
+          label="浏览次数">
         </el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
@@ -64,14 +64,15 @@
         articleManagement: {
           name: '',
           author: '',
-          desc: '',
-          limit: ''
+          descInfo: '',
+          image: '',
+          view:''
         }
       }
     },
     methods: {
       getArticleManagement() {
-        this.$api.get(`/api/v1/blog`, this.articleManagement, (res) => {
+        this.$api.post(`/api/v1/blogs`, this.articleManagement, (res) => {
           if (res) {
             this.articleManagementData = res.data;
           }

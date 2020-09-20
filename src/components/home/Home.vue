@@ -104,7 +104,7 @@
         </div>
       </div>
       <div class="jieshao-center_center">
-        <el-button round>查看更多</el-button>
+        <el-button round @click="gotoMyTravel">查看更多</el-button>
       </div>
     </div>
     <!----------我的生活-------------->
@@ -123,41 +123,41 @@
         <div class="shenghuo-center-a">
           <div class="tuji">
             <div class="tuji-a">
-              <el-radio-group v-model="radioButton" size="medium">
-                <el-radio-button :label="true">Vue学习笔记</el-radio-button>
-                <el-radio-button :label="false">JavaScript学习笔记</el-radio-button>
+              <el-radio-group v-model="radioButton" size="medium" @change="changeActive">
+                <el-radio-button v-for="(item,index) of category"  :label="index">{{item.name}}</el-radio-button>
+<!--                <el-radio-button :label="false">JavaScript学习笔记</el-radio-button>-->
               </el-radio-group>
             </div>
-            <div v-show="radioButton">
+            <div v-for="(item,index) of category" v-show="activeIndex == index">
               <div class="shenghuo-center-zhong">
-                <div v-for="(item,index) of shList" class="zhong-a">
+                <div @click="gotoDetail(blog)" v-for="(blog,index) of item.blogs" class="zhong-a">
                   <div class="zhong-a-head base">
-                    <img :src="item.img">
+                    <img :src="blog.image">
                   </div>
                   <div class="zhong-a-bottom">
-                    <span>{{item.jianjie}}</span>
+                    <span>{{blog.name}}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div v-show="!radioButton">
-              <div class="shenghuo-center-you">
-                <div v-for="(item,index) of hsList" class="shenghuo-center-you">
-                  <div class="zhong-b">
-                    <div class="zhong-b-center base">
-                      <img :src="item.img2">
-                    </div>
-                    <div class="zhong-a-bottom-a">
-                      <span>{{item.jianjie2}}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<!--            <div v-show="!radioButton">-->
+<!--              <div class="shenghuo-center-you">-->
+<!--                <div v-for="(item,index) of hsList" class="shenghuo-center-you">-->
+<!--                  <div class="zhong-b">-->
+<!--                    <div class="zhong-b-center base">-->
+<!--                      <img :src="item.img2">-->
+<!--                    </div>-->
+<!--                    <div class="zhong-a-bottom-a">-->
+<!--                      <span>{{item.jianjie2}}</span>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
 
           </div>
           <div class="shenghuo-center-xia">
-            <el-button round>查看更多</el-button>
+            <el-button round @click="gotoGuidang">查看更多</el-button>
           </div>
         </div>
 
@@ -175,16 +175,16 @@
           <span class="title-e">Newest</span>
         </div>
       </div>
-      <div v-for="(item,index) of xwList" class="xinwen-center-shang">
+      <div @click="gotoDetail" v-for="(item,index) of articleManagementData" class="xinwen-center-shang">
         <div class="xinwen-shang-zuo">
-          <img :src="item.xwImg">
+          <img :src="item.image">
         </div>
         <div class="xinwen-shang-you">
           <div class="xinwen-shang">
-            <span>{{item.xwname}}</span>
+            <span>{{item.name}}</span>
           </div>
           <div class="xinwen-zhong">
-            <span>{{item.xwtitle}}</span>
+            <span>{{item.descInfo}}</span>
           </div>
           <div class="xinwen-xia">
             <el-button size="small" round>查看更多</el-button>
@@ -192,7 +192,7 @@
         </div>
       </div>
       <div class="xinwen-bottom">
-        <el-button round>查看更多</el-button>
+        <el-button round @click="goGuidang">查看更多</el-button>
       </div>
     </div>
   </div>
@@ -203,6 +203,7 @@
     name: "Home",
     data() {
       return {
+        activeIndex: 0,
         traveList:[],
         imglist: [],
         about:{},
@@ -228,43 +229,57 @@
           desc: '制定目标，勇往直前'
         },],
         List: [],
-        radioButton: true,
-        shList: [{
-          img: 'http://xlsb.luokangyuan.com/7.jpg',
-          jianjie: '读书破万卷，下笔如有神'
-        }, {
-          img: 'http://xlsb.luokangyuan.com/8.jpg',
-          jianjie: '为政以德，譬如北辰，居其所而众星共之'
-        }, {
-          img: 'http://xlsb.luokangyuan.com/9.jpg',
-          jianjie: '温故而知新，可以为师矣'
-        },],
-        hsList: [{
-          img2: 'http://xlsb.luokangyuan.com/10.jpg',
-          jianjie2: '君子周而不比，小人比而不周'
-        }, {
-          img2: 'http://xlsb.luokangyuan.com/a3.jpg',
-          jianjie2: '学而不思则罔，思而不学则殆'
-        }, {
-          img2: 'http://xlsb.luokangyuan.com/a2.jpg',
-          jianjie2: '攻乎异端，斯害也已'
-        },],
-        xwList:[{
-          xwImg:'http://xlsb.luokangyuan.com/21.jpg',
-          xwname:'如何提升企业网站价值，企业建站过程应该注意什么？',
-          xwtitle:'互联网的发展，无论是企业或个人，都会选择通往互联网的捷径，以发展企业文化或推广产品概念。面对日益发达的互联网社会，大多数企业开始重视网站，并开始加大对网站搭建的投入，采用多渠道的网络推广形式来推广自己的品牌企业文化，以吸引更多的用户流量，促进流量的转换。'
-        },{
-          xwImg:'http://xlsb.luokangyuan.com/22.jpg',
-          xwname:'如何提升企业网站价值，企业建站过程应该注意什么？',
-          xwtitle:'互联网的发展，无论是企业或个人，都会选择通往互联网的捷径，以发展企业文化或推广产品概念。面对日益发达的互联网社会，大多数企业开始重视网站，并开始加大对网站搭建的投入，采用多渠道的网络推广形式来推广自己的品牌企业文化，以吸引更多的用户流量，促进流量的转换。'
-        },{
-          xwImg:'http://xlsb.luokangyuan.com/23.jpg',
-          xwname:'如何提升企业网站价值，企业建站过程应该注意什么？',
-          xwtitle:'互联网的发展，无论是企业或个人，都会选择通往互联网的捷径，以发展企业文化或推广产品概念。面对日益发达的互联网社会，大多数企业开始重视网站，并开始加大对网站搭建的投入，采用多渠道的网络推广形式来推广自己的品牌企业文化，以吸引更多的用户流量，促进流量的转换。'
-        },]
+        radioButton: 0,
+        // shList: [{
+        //   img: 'http://xlsb.luokangyuan.com/7.jpg',
+        //   jianjie: '读书破万卷，下笔如有神'
+        // }, {
+        //   img: 'http://xlsb.luokangyuan.com/8.jpg',
+        //   jianjie: '为政以德，譬如北辰，居其所而众星共之'
+        // }, {
+        //   img: 'http://xlsb.luokangyuan.com/9.jpg',
+        //   jianjie: '温故而知新，可以为师矣'
+        // },],
+        // hsList: [{
+        //   img2: 'http://xlsb.luokangyuan.com/10.jpg',
+        //   jianjie2: '君子周而不比，小人比而不周'
+        // }, {
+        //   img2: 'http://xlsb.luokangyuan.com/a3.jpg',
+        //   jianjie2: '学而不思则罔，思而不学则殆'
+        // }, {
+        //   img2: 'http://xlsb.luokangyuan.com/a2.jpg',
+        //   jianjie2: '攻乎异端，斯害也已'
+        // },],
+        category:[],
+        articleManagementData:[],
+        query:{
+          author:'',
+          classifyId:'',
+          desc:'',
+          limit: 0,
+          name:''
+        }
       }
     },
     methods:{
+      imgList(){
+        this.$api.get(`/api/v1/carouse/index`,null, (res) => {
+            if (res) {
+              this.imglist = res.data;}})
+      },
+      // 改变激活状态
+      changeActive (index) {
+        this.activeIndex = index;
+      },
+
+      //查询分类文章
+      getArticle(){
+        this.$api.get(`/api/v1/blog/category`,null, (res) => {
+          if (res) {
+            this.category = res.data;
+          }
+        })
+      },
       rowClass(index){
         if(index == 1){
           return 'row-convter';
@@ -283,10 +298,30 @@
       gotoFamousAphorism(){
         this.$router.push({path:"/famousAphorism"})
       },
+      gotoGuidang(){
+        this.$router.push({path:"/guidang"})
+      },
+      goGuidang(){
+        this.$router.push({path:"/guidang"})
+      },
+      gotoMyTravel(){
+        this.$router.push({path:"/myTravel"})
+      },
+      gotoDetail(blog){
+        let id = blog.id;
+        this.$router.push({
+          name:"Detail",
+          params:{
+            id: id
+          }
+        })
+      },
+      //查询最新文章
       getList(){
-        this.$api.get(`/api/v1/carouse/index`,null, (res) => {
+        this.query.limit = 4;
+        this.$api.post(`/api/v1/blogs`,this.query, (res) => {
           if (res) {
-           this.imglist = res.data;
+            this.articleManagementData = res.data;
           }
         })
       },
@@ -303,14 +338,20 @@
             this.traveList = res.data
           }
         })
-      }
+      },
 
-    },
+      },
+
+
+
+
     mounted() {
       this.getList();
       this.getAbout();
       this.getBook();
       this.getTrave();
+      this.getArticle();
+      this.imgList();
     }
 
   }
@@ -986,7 +1027,7 @@
     justify-content: center;
   }
   .xinwen{
-    height: 1000px;
+    height: 100%;
     width: 100%;
     background: #dadada;
     display: flex;

@@ -20,6 +20,8 @@ import AboutMe from '@/components/aboutMe/AboutMe'
 import Carousel from '@/components/carousel/Carousel'
 import ArticleManagement from '@/components/articleManagement/ArticleManagement'
 import FamousAphorism from '@/components/famousAphorism/FamousAphorism'
+import MyTravel from '@/components/myTravel/MyTravel'
+import Detail from '@/components/detail/Detail'
 
 Vue.use(Router)
 
@@ -59,6 +61,14 @@ export default new Router({
           path: '/famousAphorism',
           name: 'FamousAphorism',
           component: FamousAphorism
+        },{
+          path: '/myTravel',
+          name: 'MyTravel',
+          component: MyTravel
+        },{
+          path: '/detail',
+          name: 'Detail',
+          component: Detail
         },
       ],
       redirect: '/home'
