@@ -44,7 +44,7 @@
     </el-dialog>
   </el-form>
   <div class="fd-content">
-    <mavon-editor v-model="article.content"/>
+    <mavon-editor  @change="handleMarkdownChange"/>
   </div>
 
 </div>
@@ -74,6 +74,9 @@
           }
     },
     methods:{
+      handleMarkdownChange(content, render) {
+        this.article.content = render;
+      },
       openArticle(){
         this.dialogFormVisible = true;
 

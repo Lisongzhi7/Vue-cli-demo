@@ -7,16 +7,30 @@
                     <span class="boke">My blog site</span>
                 </div>
                 <div class="fd-logo-tile">
-                    <router-link to="/home"><span>网站首页</span></router-link>
-                  <router-link to="/guidang"><span>博客日记</span></router-link>
-                  <router-link to="/lianjie"><span>碎言碎语</span></router-link>
-                  <router-link to="/category"><span>时间轴</span></router-link>
-                    <router-link to="/guanyuwo"><span>关于我</span></router-link>
+                    <router-link to="/home"><span class="fd-icon"><i
+                      class="iconfont icon-shouye"></i></span><span>网站首页</span></router-link>
+                  <router-link to="/guidang"><span class="fd-icon"><i
+                    class="iconfont icon-guanyuwo1"></i></span><span>博客日记</span></router-link>
+                  <router-link to="/lianjie"><span class="fd-icon"><i
+                    class="iconfont icon-tubiao-"></i></span><span>碎言碎语</span></router-link>
+                  <router-link to="/category"><span class="fd-icon"><i
+                    class="iconfont icon-hua"></i></span><span>时间轴</span></router-link>
+                    <router-link to="/guanyuwo"><span class="fd-icon"><i
+                      class="iconfont icon-guanyuwo"></i></span><span>关于我</span></router-link>
                     <span @click="dialogFormVisible = true"><i class="iconfont icon-sousuo"></i></span>
                 </div>
             </div>
             <el-dialog  :modal-append-to-body="false" :show-close="false" :visible.sync="dialogFormVisible">
-                <div class="zhezhao"><span>搜索</span></div>
+                <div class="zhezhao">
+                  <span>搜索</span>
+                  <div class="sousuo">
+                    <el-input
+                      placeholder="请输入内容"
+                      v-model="input"
+                      clearable>
+                    </el-input>
+                  </div>
+                </div>
             </el-dialog>
         </div>
         <a href="javascript:" id="return_top" title="回到顶部"><i class="iconfont icon-hiiniconhuidaodingbu201"></i></a>
@@ -44,6 +58,7 @@ export default {
     name: "Index",
   data(){
     return {
+      input: '',
       // imglist: [
       //   "http://xlsb.luokangyuan.com/a5.jpg",
       //   "http://xlsb.luokangyuan.com/8.jpg",
@@ -148,6 +163,9 @@ export default {
     bottom:60px;
     display:flex;
 }
+.fd-icon i{
+  color: #000;
+}
 .iconfont{
     font-size: 70px;
 }
@@ -159,7 +177,7 @@ export default {
     font-size: 18px;
   }
 .zhezhao span{
-  font-size: 18px;
+  font-size: 20px;
 }
   .fd-logo-tile i:hover{
     cursor: pointer;
@@ -167,5 +185,8 @@ export default {
   .iconfont{
     color: cadetblue;
   }
+.sousuo{
+  margin-top: 20px;
+}
 
 </style>

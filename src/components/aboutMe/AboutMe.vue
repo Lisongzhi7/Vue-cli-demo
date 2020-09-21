@@ -12,52 +12,52 @@
       </div>
       <div class="bottom">
         <el-form ref="about" :model="about">
-          <el-form-item label="个人描述">
+          <el-form-item label="个人描述：">
             <span>{{about.describeInfo}}</span>
           </el-form-item>
         </el-form>
         <el-form ref="about" :model="about">
-          <el-form-item label="邮箱地址">
+          <el-form-item label="邮箱地址：">
             <span>{{about.email}}</span>
           </el-form-item>
         </el-form>
         <el-form ref="about" :model="about">
-          <el-form-item label="自我鼓励文字">
+          <el-form-item label="自我鼓励文字：">
             <span>{{about.encourageFont}}</span>
           </el-form-item>
         </el-form>
         <el-form ref="about" :model="about">
-        <el-form-item label="GitHub地址">
+        <el-form-item label="GitHub地址：">
           <span>{{about.github}}</span>
         </el-form-item>
       </el-form>
         <el-form ref="about" :model="about">
-        <el-form-item label="头像地址">
+        <el-form-item label="头像地址：">
           <span>{{about.headImage}}</span>
         </el-form-item>
       </el-form>
         <el-form ref="about" :model="about">
-        <el-form-item label="个人介绍">
+        <el-form-item label="个人介绍：">
           <span>{{about.introduction}}</span>
         </el-form-item>
       </el-form>
         <el-form ref="about" :model="about">
-        <el-form-item label="昵称">
+        <el-form-item label="昵称：">
           <span>{{about.name}}</span>
         </el-form-item>
       </el-form>
         <el-form ref="about" :model="about">
-        <el-form-item label="QQ号">
+        <el-form-item label="QQ号：">
           <span>{{about.qq}}</span>
         </el-form-item>
       </el-form>
         <el-form ref="about" :model="about">
-        <el-form-item label="配图地址">
+        <el-form-item label="配图地址：">
           <span>{{about.url}}</span>
         </el-form-item>
       </el-form>
         <el-form ref="about" :model="about">
-        <el-form-item label="微信号">
+        <el-form-item label="微信号：">
           <span>{{about.weChat}}</span>
         </el-form-item>
       </el-form>
@@ -244,5 +244,8 @@
     margin-left: 10px;
     margin-top: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+  }
+  .el-form{
+    margin-left: 20px;
   }
 </style>

@@ -29,6 +29,17 @@
           <div class="you-center">
                     <span>{{about.describeInfo}}</span>
           </div>
+          <div class="you-bottom">
+            <div class="you-bottom-zuo">
+              <span>Follow Me：</span>
+            </div>
+            <div class="you-bottom-you">
+              <span class="you-a best"><i class="iconfont icon-github2"></i></span>
+              <span class="you-b best"><i class="iconfont icon-qq"></i></span>
+              <span class="you-c best"><i class="iconfont icon-weixin"></i></span>
+              <span class="you-d best"><i class="iconfont icon-tubiao209"></i></span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="center-bottom">
@@ -175,7 +186,7 @@
           <span class="title-e">Newest</span>
         </div>
       </div>
-      <div @click="gotoDetail" v-for="(item,index) of articleManagementData" class="xinwen-center-shang">
+      <div @click="gotoDetail(item)" v-for="(item,index) of articleManagementData"  class="xinwen-center-shang">
         <div class="xinwen-shang-zuo">
           <img :src="item.image">
         </div>
@@ -316,6 +327,7 @@
           }
         })
       },
+
       //查询最新文章
       getList(){
         this.query.limit = 4;
@@ -452,28 +464,28 @@
   }
 
   .center-center-zuo {
-    height: 300px;
-    width: 500px;
+    height: 250px;
+    width: 450px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   }
 
   .center-center-zuo img {
     height: 250px;
     width: 450px;
+    transform: scale(1.0, 1.0);
+    transition: transform 0.7s ease;
   }
-
+.center-center-zuo img:hover{
+  transform: scale(1.1,1.1);
+  transition: transform 0.7s ease;
+}
   .center-center-zuo:hover {
     cursor: pointer;
-  }
-
-  .center-center-zuo:hover img {
-    transform: scale(1.1);
-  }
-
-  .center-center-zuo img {
-    transition: all .5s;
   }
 
   .center-center-you {
@@ -486,7 +498,7 @@
   }
 
   .you-head {
-    height: 150px;
+    height: 100px;
     width: 800px;
   }
 
@@ -496,7 +508,7 @@
   }
 
   .you-center {
-    height: 100px;
+    height: 50px;
     width: 800px;
   }
 
@@ -504,6 +516,42 @@
     font-size: 16px;
     font-family: 'Alibaba-PuHuiTi-Regular';
   }
+.you-bottom{
+  height: 50px;
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+}
+.you-bottom-zuo{
+  height: 50px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Alibaba-PuHuiTi-Regular;
+  font-weight: bold;
+}
+.you-bottom-you{
+  height: 50px;
+  width: 700px;
+  display: flex;
+  flex-direction: row;
+}
+.best{
+  height: 50px;
+  width: 50px;
+display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  border-radius: 25px;
+  background: #fff;
+  color: #303133;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+}
+.best i{
+ font-size: 30px;
+}
 
   .center-bottom {
     height: 60px;
@@ -534,7 +582,7 @@
 
   .icon-b i {
     font-size: 46px;
-    color: #42b983;
+    color: #63a35c;
   }
 
   .icon-c {
@@ -614,10 +662,10 @@
 
   .center-zhongbu {
     height: 420px;
-    width: 1300px;
+    width: 944px;
     display: flex;
     justify-content: center;
-
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   }
 .center-xia{
   height: 80px;
@@ -754,6 +802,7 @@
     flex-direction: column;
     align-items: center;
     background: #F5F7FA;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   }
 
   .jieshao-center_head {

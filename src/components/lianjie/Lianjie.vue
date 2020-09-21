@@ -50,16 +50,28 @@
           image:'http://xlsb.luokangyuan.com/tubiao2.png'
         },{
           time:'2020-07-22',
-          desc:'刚开始的接触，我发现我对这些都不熟悉，不熟悉到看不懂的程度，慢慢的发现自己真的要学的东西实在太多了。',
+          desc:'每一天都重复一件事情，是什么样的体验，当你做不下去的时候，你首先想到的是什么？',
           image:'http://xlsb.luokangyuan.com/tubiao3.png'
         },{
           time:'2020-08-02',
-          desc:'刚开始的接触，我发现我对这些都不熟悉，不熟悉到看不懂的程度，慢慢的发现自己真的要学的东西实在太多了。',
+          desc:'学习不在一时，而是长时间的积累，把所学的知识都记在自己的脑海里面，温故而知新',
           image:'http://xlsb.luokangyuan.com/tubiao4.png'
         },{
           time:'2020-08-02',
-          desc:'刚开始的接触，我发现我对这些都不熟悉，不熟悉到看不懂的程度，慢慢的发现自己真的要学的东西实在太多了。',
+          desc:'这一天，我萌生了想要放弃的打算，就感觉自己学的不是很好，也不是很能理解到其中的含义',
           image:'http://xlsb.luokangyuan.com/tubiao5.png'
+        },{
+          time:'2020-08-02',
+          desc:'经过一晚上的思考，第二天早上起床，还是义无反顾地打开了电脑，点击了编程软件，继续没有完成的代码',
+          image:'http://xlsb.luokangyuan.com/tubiao6.png'
+        },{
+          time:'2020-08-02',
+          desc:'如果你问我为什么还要坚持这个，学也学不会，我想了想，为什么呢，因为以后吧......',
+          image:'http://xlsb.luokangyuan.com/tubiao1.png'
+        },{
+          time:'2020-08-02',
+          desc:'接下来的时间当中，我就没有再想过放弃了，毕竟做一行爱一行，坚持做好一件事情，你会发现会有很好的收获的',
+          image:'http://xlsb.luokangyuan.com/tubiao2.png'
         },]
       }
     },
@@ -217,8 +229,24 @@
     margin-top: 35px;
   }
   .tubiaoColor5{
+    transform:rotate(-8deg);
+    background: rgb(255,255,205);
+    margin-top: -25px;
+  }
+  .tubiaoColor6{
+    transform:rotate(8deg);
+    background: rgb(254,201,227);
+    margin-top: -25px;
+  }
+  .tubiaoColor7{
+    transform:rotate(-8deg);
+    background: rgb(210,251,253);
+    margin-top: -25px;
+  }
+  .tubiaoColor8{
     transform:rotate(8deg);
     background: rgb(255,255,205);
     margin-top: -25px;
   }
+
 </style>

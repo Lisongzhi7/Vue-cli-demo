@@ -7,17 +7,33 @@
       <div class="center-detail">
         <div class="center-dingbu"></div>
         <div class="center-label">
-          <span class="author"></span>
-          <span class="name"></span>
-          <span class="createTime"></span>
+          <div class="center-label-neirong">
+            <span class="miaoshu">作者</span>
+            <span class="lsz">{{blog.author}}</span>
+          </div>
+          <div class="center-label-neirong">
+            <span class="miaoshu">名称</span>
+            <span class="lsz">{{blog.name}}</span>
+          </div>
+          <div class="center-label-neirong">
+            <span class="miaoshu">创建时间</span>
+            <span class="lsz">{{blog.createTimeStr}}</span>
+          </div>
+          <div class="center-label-neirong" v-for="(label,index) of blog.labels">
+            <span class="miaoshu">标签</span>
+            <span  class="lsz">{{label.name}}</span>
+          </div>
+
         </div>
-        <div class="center-Name"></div>
-        <div class="center-descInfo"></div>
+
+        <div class="center-Name">
+          <span>{{blog.name}}</span>
+        </div>
+
         <div class="center-content">
-          <span>{{blog.content}}</span>
-        </div>
-        <div class="center-xia"></div>
+        <span v-html="blog.content"></span>
       </div>
+  </div>
   </div>
   </div>
 </template>
@@ -73,34 +89,67 @@
     justify-content: center;
   }
   .center-detail{
-    width: 800px;
+    width: 1300px;
     background: #a8edea;
     display: flex;
     flex-direction: column;
   }
   .center-dingbu{
     height: 10px;
-    width: 800px;
+    width: 1300px;
     background: #bd2c00;
   }
   .center-label{
     height: 50px;
-    width: 800px;
+    width: 1300px;
     background: #cf9236;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .center-label-neirong{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 20px;
+  }
+
+  .miaoshu{
+    background: #384e64;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 5px 10px 5px 10px;
+  }
+
+  .lsz{
+    background: #ff7a64;;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 10px 5px 10px;
   }
   .center-Name{
-    height: 300px;
-    width: 800px;
+    height: 200px;
+    width: 1300px;
     background: #795da3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .center-descInfo{
-    height: 100px;
-    width: 800px;
-    background: #63a35c;
+  .center-Name span{
+    font-size: 40px;
+    color: #fff;
   }
   .center-content{
-    height: 900px;
-    width: 800px;
+    width: 1300px;
     background: #409eff;
   }
 </style>

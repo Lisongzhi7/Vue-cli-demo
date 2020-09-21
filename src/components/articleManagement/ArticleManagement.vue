@@ -23,7 +23,7 @@
         <el-table-column
           align="center"
           prop="descInfo"
-          label="文章描述">
+          label="文章描述" show-overflow-tooltip="true">
         </el-table-column>
         <el-table-column
           align="center"

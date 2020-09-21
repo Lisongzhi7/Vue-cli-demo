@@ -18,23 +18,23 @@
         <div v-for="(item,index) of list" class="guidang-zuo-a">
           <div class="zuo-head">
             <div class="zuo-head-img">
-              <img :src="item.img"/>
+              <img :src="item.image"/>
             </div>
           </div>
           <div class="zuo-center">
             <div class="zuo-center-head">
             <div class="zuo-center-shang">
-              <span>{{item.designation}}</span>
+              <span>{{item.name}}</span>
             </div>
             <div class="zuo-center-zhong">
-              <span>{{item.desc}}</span>
+              <span>{{item.descInfo}}</span>
             </div>
             <div class="zuo-center-xia">
-              <span><i class="iconfont icon-shizhong"></i><span>{{item.time}}</span></span>
-              <span><i class="iconfont icon-gerenzhongxin1"></i><span>{{item.name}}</span></span>
-              <span><i class="iconfont icon-mulu"></i><span >{{item.boke}}</span></span>
-              <span><i class="iconfont icon-guankan01"></i><span>{{item.watch}}</span></span>
-              <span><i class="iconfont icon-aixin"></i><span>{{item.like}}</span></span>
+              <span><i class="iconfont icon-shizhong"></i><span>{{item.createTimeStr}}</span></span>
+              <span><i class="iconfont icon-gerenzhongxin1"></i><span>{{item.author}}</span></span>
+              <span><i class="iconfont icon-mulu"></i><span >{{item.name}}</span></span>
+              <span><i class="iconfont icon-guankan01"></i><span>{{item.view}}</span></span>
+              <span><i class="iconfont icon-aixin"></i><span>{{item.likeNum}}</span></span>
             </div>
             </div>
           </div>
@@ -94,43 +94,7 @@ export default {
   data(){
     return{
       input:'',
-      list:[{
-        img:'http://xlsb.luokangyuan.com/26.jpg',
-        designation:'Just One Last Dance',
-        desc:'《Just One Last Dance》是一个朋友介绍给我听的，当时一听就喜欢上它了，直到现在，就像《因为是女子》一样，我空间的主打歌还挺多的，唯独这两首让我舍不得换掉......',
-        time:'2020-09-01',
-        name:'李松直',
-        boke:'个人博客日记',
-        watch:'1',
-        like:'0'
-      },{
-        img:'http://xlsb.luokangyuan.com/22.jpg',
-        designation:'Just One Last Dance',
-        desc:'《Just One Last Dance》是一个朋友介绍给我听的，当时一听就喜欢上它了，直到现在，就像《因为是女子》一样，我空间的主打歌还挺多的，唯独这两首让我舍不得换掉......',
-        time:'2020-09-01',
-        name:'李松直',
-        boke:'个人博客日记',
-        watch:'1',
-        like:'0'
-      },{
-        img:'http://xlsb.luokangyuan.com/27.jpg',
-        designation:'Just One Last Dance',
-        desc:'《Just One Last Dance》是一个朋友介绍给我听的，当时一听就喜欢上它了，直到现在，就像《因为是女子》一样，我空间的主打歌还挺多的，唯独这两首让我舍不得换掉......',
-        time:'2020-09-01',
-        name:'李松直',
-        boke:'个人博客日记',
-        watch:'1',
-        like:'0'
-      },{
-        img:'http://xlsb.luokangyuan.com/27.jpg',
-        designation:'Just One Last Dance',
-        desc:'《Just One Last Dance》是一个朋友介绍给我听的，当时一听就喜欢上它了，直到现在，就像《因为是女子》一样，我空间的主打歌还挺多的，唯独这两首让我舍不得换掉......',
-        time:'2020-09-01',
-        name:'李松直',
-        boke:'个人博客日记',
-        watch:'1',
-        like:'0'
-      },],
+      list:[],
       List:[{
         image:'http://xlsb.luokangyuan.com/31.jpg',
         title:'想折腾也得看运气不是，我是不是太倒霉了？！'
@@ -157,10 +121,32 @@ export default {
         name: 'GitHub'
       }, {
         name: '每日读书'
-      },]
+      },],
+      query:{
+        author:'',
+        classifyId:'',
+        desc:'',
+        limit: 0,
+        name:''
+      }
     }
   },
   methods:{
+    getSearch(){
+      this.$api.post(`/api/v1/blogs`,this.query, (res) => {
+        if (res) {
+          this.query = res.data;
+        }
+      })
+    },
+    getBlogs(){
+      this.query.limit = '';
+      this.$api.post(`/api/v1/blogs`,this.query, (res) => {
+        if (res) {
+            this.list = res.data;
+        }
+      })
+    },
     createClasee(index) {
       return "" + (index + 1);
     },
@@ -174,8 +160,11 @@ export default {
       var color = '#' + r1 + g1 + b1;
       return color;
     },
-  }
-
+  },
+mounted() {
+    this.getBlogs();
+    this.getSearch();
+}
 }
 
 </script>
@@ -206,7 +195,7 @@ export default {
   .bkrj{
     height: 100px;
     width: 1300px;
-    margin-top: 50px;
+    margin-top: 51px;
     display: flex;
     align-items: center;
     justify-content: center;
