@@ -24,20 +24,20 @@
         </div>
         <div class="center-center-you">
           <div class="you-head">
-                    <span>{{about.introduction}}</span>
+            <span>{{about.introduction}}</span>
           </div>
           <div class="you-center">
-                    <span>{{about.describeInfo}}</span>
+            <span>{{about.describeInfo}}</span>
           </div>
           <div class="you-bottom">
             <div class="you-bottom-zuo">
               <span>Follow Me：</span>
             </div>
             <div class="you-bottom-you">
-              <span class="you-a best"><i class="iconfont icon-github2"></i></span>
-              <span class="you-b best"><i class="iconfont icon-qq"></i></span>
-              <span class="you-c best"><i class="iconfont icon-weixin"></i></span>
-              <span class="you-d best"><i class="iconfont icon-tubiao209"></i></span>
+              <a :href="about.github" target="_blank" class="you-a best"><i class="iconfont icon-github2"></i></a>
+              <el-tooltip :content="about.qq" placement="top"><span class="you-b best"><i class="iconfont icon-qq"></i></span></el-tooltip>
+              <el-tooltip :content="about.weChat" placement="top"><span class="you-c best"><i class="iconfont icon-weixin"></i></span></el-tooltip>
+              <el-tooltip :content="about.email" placement="top"><span class="you-d best"><i class="iconfont icon-tubiao209"></i></span></el-tooltip>
             </div>
           </div>
         </div>
@@ -135,8 +135,8 @@
           <div class="tuji">
             <div class="tuji-a">
               <el-radio-group v-model="radioButton" size="medium" @change="changeActive">
-                <el-radio-button v-for="(item,index) of category"  :label="index">{{item.name}}</el-radio-button>
-<!--                <el-radio-button :label="false">JavaScript学习笔记</el-radio-button>-->
+                <el-radio-button v-for="(item,index) of category" :label="index">{{item.name}}</el-radio-button>
+                <!--                <el-radio-button :label="false">JavaScript学习笔记</el-radio-button>-->
               </el-radio-group>
             </div>
             <div v-for="(item,index) of category" v-show="activeIndex == index">
@@ -151,20 +151,20 @@
                 </div>
               </div>
             </div>
-<!--            <div v-show="!radioButton">-->
-<!--              <div class="shenghuo-center-you">-->
-<!--                <div v-for="(item,index) of hsList" class="shenghuo-center-you">-->
-<!--                  <div class="zhong-b">-->
-<!--                    <div class="zhong-b-center base">-->
-<!--                      <img :src="item.img2">-->
-<!--                    </div>-->
-<!--                    <div class="zhong-a-bottom-a">-->
-<!--                      <span>{{item.jianjie2}}</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
+            <!--            <div v-show="!radioButton">-->
+            <!--              <div class="shenghuo-center-you">-->
+            <!--                <div v-for="(item,index) of hsList" class="shenghuo-center-you">-->
+            <!--                  <div class="zhong-b">-->
+            <!--                    <div class="zhong-b-center base">-->
+            <!--                      <img :src="item.img2">-->
+            <!--                    </div>-->
+            <!--                    <div class="zhong-a-bottom-a">-->
+            <!--                      <span>{{item.jianjie2}}</span>-->
+            <!--                    </div>-->
+            <!--                  </div>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
 
           </div>
           <div class="shenghuo-center-xia">
@@ -186,7 +186,9 @@
           <span class="title-e">Newest</span>
         </div>
       </div>
-      <div @click="gotoDetail(item)" v-for="(item,index) of articleManagementData"  class="xinwen-center-shang">
+      <div data-aos="fade-up"
+           data-aos-anchor-placement="center-bottom" @click="gotoDetail(item)"
+           v-for="(item,index) of articleManagementData" class="xinwen-center-shang">
         <div class="xinwen-shang-zuo">
           <img :src="item.image">
         </div>
@@ -215,9 +217,9 @@
     data() {
       return {
         activeIndex: 0,
-        traveList:[],
+        traveList: [],
         imglist: [],
-        about:{},
+        about: {},
         list: [{
           icon: 'iconfont icon-shumu1',
           name: '专业特长',
@@ -261,102 +263,97 @@
         //   img2: 'http://xlsb.luokangyuan.com/a2.jpg',
         //   jianjie2: '攻乎异端，斯害也已'
         // },],
-        category:[],
-        articleManagementData:[],
-        query:{
-          author:'',
-          classifyId:'',
-          desc:'',
+        category: [],
+        articleManagementData: [],
+        query: {
+          author: '',
+          classifyId: '',
+          desc: '',
           limit: 0,
-          name:''
+          name: ''
         }
       }
     },
-    methods:{
-      imgList(){
-        this.$api.get(`/api/v1/carouse/index`,null, (res) => {
-            if (res) {
-              this.imglist = res.data;}})
+    methods: {
+      imgList() {
+        this.$api.get(`/api/v1/carouse/index`, null, (res) => {
+          if (res) {
+            this.imglist = res.data;
+          }
+        })
       },
       // 改变激活状态
-      changeActive (index) {
+      changeActive(index) {
         this.activeIndex = index;
       },
-
       //查询分类文章
-      getArticle(){
-        this.$api.get(`/api/v1/blog/category`,null, (res) => {
+      getArticle() {
+        this.$api.get(`/api/v1/blog/category`, null, (res) => {
           if (res) {
             this.category = res.data;
           }
         })
       },
-      rowClass(index){
-        if(index == 1){
+      rowClass(index) {
+        if (index == 1) {
           return 'row-convter';
         }
       },
-      getBook(){
-        this.$api.get(`/api/v1/book/index`,null, (res) => {
+      getBook() {
+        this.$api.get(`/api/v1/book/index`, null, (res) => {
           if (res) {
-              this.List = res.data;
+            this.List = res.data;
           }
         })
       },
-      gotoAbout(){
-        this.$router.push({path:"/guanyuwo"})
+      gotoAbout() {
+        this.$router.push({path: "/guanyuwo"})
       },
-      gotoFamousAphorism(){
-        this.$router.push({path:"/famousAphorism"})
+      gotoFamousAphorism() {
+        this.$router.push({path: "/famousAphorism"})
       },
-      gotoGuidang(){
-        this.$router.push({path:"/guidang"})
+      gotoGuidang() {
+        this.$router.push({path: "/guidang"})
       },
-      goGuidang(){
-        this.$router.push({path:"/guidang"})
+      goGuidang() {
+        this.$router.push({path: "/guidang"})
       },
-      gotoMyTravel(){
-        this.$router.push({path:"/myTravel"})
+      gotoMyTravel() {
+        this.$router.push({path: "/myTravel"})
       },
-      gotoDetail(blog){
+      gotoDetail(blog) {
         let id = blog.id;
         this.$router.push({
-          name:"Detail",
-          params:{
+          name: "Detail",
+          params: {
             id: id
           }
         })
       },
-
       //查询最新文章
-      getList(){
+      getList() {
         this.query.limit = 4;
-        this.$api.post(`/api/v1/blogs`,this.query, (res) => {
+        this.$api.post(`/api/v1/blogs`, this.query, (res) => {
           if (res) {
             this.articleManagementData = res.data;
           }
         })
       },
-      getAbout(){
-        this.$api.get(`/api/v1/about`,null, (res) => {
+      getAbout() {
+        this.$api.get(`/api/v1/about`, null, (res) => {
           if (res) {
             this.about = res.data
           }
         })
       },
-      getTrave(){
-        this.$api.get(`/api/v1/travel/index`,null, (res) => {
+      getTrave() {
+        this.$api.get(`/api/v1/travel/index`, null, (res) => {
           if (res) {
             this.traveList = res.data
           }
         })
       },
-
-      },
-
-
-
-
+    },
     mounted() {
       this.getList();
       this.getAbout();
@@ -365,7 +362,6 @@
       this.getArticle();
       this.imgList();
     }
-
   }
 </script>
 
@@ -480,10 +476,12 @@
     transform: scale(1.0, 1.0);
     transition: transform 0.7s ease;
   }
-.center-center-zuo img:hover{
-  transform: scale(1.1,1.1);
-  transition: transform 0.7s ease;
-}
+
+  .center-center-zuo img:hover {
+    transform: scale(1.1, 1.1);
+    transition: transform 0.7s ease;
+  }
+
   .center-center-zuo:hover {
     cursor: pointer;
   }
@@ -516,42 +514,47 @@
     font-size: 16px;
     font-family: 'Alibaba-PuHuiTi-Regular';
   }
-.you-bottom{
-  height: 50px;
-  width: 800px;
-  display: flex;
-  flex-direction: row;
-}
-.you-bottom-zuo{
-  height: 50px;
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Alibaba-PuHuiTi-Regular;
-  font-weight: bold;
-}
-.you-bottom-you{
-  height: 50px;
-  width: 700px;
-  display: flex;
-  flex-direction: row;
-}
-.best{
-  height: 50px;
-  width: 50px;
-display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10px;
-  border-radius: 25px;
-  background: #fff;
-  color: #303133;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
-}
-.best i{
- font-size: 30px;
-}
+
+  .you-bottom {
+    height: 50px;
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .you-bottom-zuo {
+    height: 50px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Alibaba-PuHuiTi-Regular;
+    font-weight: bold;
+  }
+
+  .you-bottom-you {
+    height: 50px;
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .best {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    border-radius: 25px;
+    background: #fff;
+    color: #303133;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+  }
+
+  .best i {
+    font-size: 30px;
+  }
 
   .center-bottom {
     height: 60px;
@@ -582,7 +585,7 @@ display: flex;
 
   .icon-b i {
     font-size: 46px;
-    color: #63a35c;
+    color: #795da3;
   }
 
   .icon-c {
@@ -667,13 +670,15 @@ display: flex;
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   }
-.center-xia{
-  height: 80px;
-  width: 944px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+  .center-xia {
+    height: 80px;
+    width: 944px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   #content article {
     float: left;
     /*margin-right: 4%;*/
@@ -973,7 +978,8 @@ display: flex;
     background: #fff;
     box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
   }
-  .zhong-a:hover{
+
+  .zhong-a:hover {
     cursor: pointer;
   }
 
@@ -1075,7 +1081,8 @@ display: flex;
     align-items: center;
     justify-content: center;
   }
-  .xinwen{
+
+  .xinwen {
     height: 100%;
     width: 100%;
     background: #dadada;
@@ -1083,7 +1090,8 @@ display: flex;
     align-items: center;
     flex-direction: column;
   }
-  .xinwen-head{
+
+  .xinwen-head {
     height: 100px;
     width: 1300px;
     margin-top: 50px;
@@ -1091,10 +1099,12 @@ display: flex;
     align-items: center;
     justify-content: center;
   }
-.xinwen-center{
-  display: flex;
-  align-items: center;
-}
+
+  .xinwen-center {
+    display: flex;
+    align-items: center;
+  }
+
   .title5 {
     font-size: 28px;
   }
@@ -1120,7 +1130,8 @@ display: flex;
     margin-left: 30px;
     margin-top: 30px;
   }
-  .xinwen-center-shang{
+
+  .xinwen-center-shang {
     height: 210px;
     width: 944px;
     display: flex;
@@ -1131,54 +1142,65 @@ display: flex;
     background: #fff;
     box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
   }
-  .xinwen-center-shang:hover{
+
+  .xinwen-center-shang:hover {
     cursor: pointer;
   }
-  .xinwen-shang-zuo{
+
+  .xinwen-shang-zuo {
     height: 180px;
     width: 310px;
     overflow: hidden;
   }
-  .xinwen-shang-zuo img:hover{
-    transform: scale(1.1,1.1);
+
+  .xinwen-shang-zuo img:hover {
+    transform: scale(1.1, 1.1);
     transition: transform 0.7s ease;
   }
-  .xinwen-shang-zuo img{
+
+  .xinwen-shang-zuo img {
     height: 180px;
     width: 310px;
     transform: scale(1.0, 1.0);
     transition: transform 0.7s ease;
   }
-  .xinwen-shang-you{
+
+  .xinwen-shang-you {
     height: 180px;
     width: 574px;
     margin-left: 20px;
     display: flex;
     flex-direction: column;
   }
-  .xinwen-shang{
+
+  .xinwen-shang {
     height: 40px;
     width: 574px;
   }
-  .xinwen-shang span{
+
+  .xinwen-shang span {
     font-size: 16px;
   }
-  .xinwen-zhong{
+
+  .xinwen-zhong {
     height: 80px;
     width: 574px;
   }
-  .xinwen-zhong span{
+
+  .xinwen-zhong span {
     font-size: 10px;
     color: #666;
   }
-  .xinwen-xia{
+
+  .xinwen-xia {
     height: 60px;
     width: 574px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
-  .xinwen-bottom{
+
+  .xinwen-bottom {
     width: 944px;
     height: 50px;
     margin-top: 30px;
@@ -1186,7 +1208,8 @@ display: flex;
     align-items: center;
     justify-content: center;
   }
-  .row-convter{
+
+  .row-convter {
     flex-direction: row-reverse;
   }
 </style>

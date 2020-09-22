@@ -5,7 +5,7 @@
         <img src="http://xlsb.luokangyuan.com/1.jpg"/>
         <span>美文摘抄</span>
       </div>
-      <div  @click="openBook" class="fd-xz"><span>新增</span></div>
+      <div @click="openBook" class="fd-xz"><span>新增</span></div>
     </div>
     <div class="bottom">
       <el-table
@@ -57,150 +57,154 @@
 </template>
 
 <script>
-    export default {
-        name: "Excerpt",
-      data() {
-        return {
-          dialogFormVisible:false,
-          tableData: [],
-          book:{
-            url:'',
-            name:'',
-          },
-        }
+  export default {
+    name: "Excerpt",
+    data() {
+      return {
+        dialogFormVisible: false,
+        tableData: [],
+        book: {
+          url: '',
+          name: '',
         },
-      methods: {
-        /**
-         * @description: 再次打开新增按钮，内容清空
-         */
-        openBook(){
-          this.book.url = '';
-          this.book.name = '';
-          this.dialogFormVisible = true;
-        },
-        /**
-         * @description: 保存新增内容
-         */
-        saveBook(){
-          this.$api.post(`/api/v1/book`,this.book, (res) => {
+      }
+    },
+    methods: {
+      /**
+       * @description: 再次打开新增按钮，内容清空
+       */
+      openBook() {
+        this.book.url = '';
+        this.book.name = '';
+        this.dialogFormVisible = true;
+      },
+      /**
+       * @description: 保存新增内容
+       */
+      saveBook() {
+        this.$api.post(`/api/v1/book`, this.book, (res) => {
+          if (res) {
+            this.dialogFormVisible = false;
+            this.$message({
+              message: '恭喜你，保存成功',
+              type: 'success'
+            });
+            this.getBook();
+          }
+        })
+      },
+      /**
+       * @description: 查询数据列表
+       */
+      getBook() {
+        this.$api.get(`/api/v1/book`, null, (res) => {
+          if (res) {
+            this.tableData = res.data;
+          }
+        })
+      },
+      // handleEdit(index, row) {
+      //   console.log(index, row);
+      // },
+      /**
+       * @description: 删除数据
+       * @param index: 下表
+       * @param row: 删除美文摘抄的对象
+       */
+      handleDelete(index, row) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          let url = '/api/v1/book/' + row.id;
+          console.log(url)
+          this.$api.delete(url, null, (res) => {
             if (res) {
-              this.dialogFormVisible = false;
               this.$message({
-                message: '恭喜你，保存成功',
+                message: '恭喜你，删除成功',
                 type: 'success'
               });
               this.getBook();
             }
           })
-        },
-        /**
-         * @description: 查询数据列表
-         */
-          getBook(){
-            this.$api.get(`/api/v1/book`,null, (res) => {
-              if (res) {
-                  this.tableData = res.data;
-              }
-            })
-          },
-        // handleEdit(index, row) {
-        //   console.log(index, row);
-        // },
-        /**
-         * @description: 删除数据
-         * @param index: 下表
-         * @param row: 删除美文摘抄的对象
-         */
-        handleDelete(index, row) {
-          this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            let url = '/api/v1/book/' + row.id;
-            console.log(url)
-            this.$api.delete(url,null, (res) => {
-              if (res) {
-                this.$message({
-                  message: '恭喜你，删除成功',
-                  type: 'success'
-                });
-                this.getBook();
-              }
-            })
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消删除'
-            });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
           });
-          console.log(index, row);
-        }
-      },
-      mounted() {
-          this.getBook();
-
+        });
+        console.log(index, row);
       }
+    },
+    mounted() {
+      this.getBook();
+
     }
+  }
 </script>
 
 <style scoped>
-.excerpt{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.head {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
+  .excerpt {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
-.excerpt-head {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 
-.excerpt-head span {
-  margin-left: 20px;
-  font-size: 22px;
-}
+  .excerpt-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.excerpt-head img {
-  height: 40px;
-  width: 40px;
-  border-radius: 20px;
-  margin-left: 30px;
-}
-.head span:hover {
-  cursor: pointer;
-}
+  .excerpt-head span {
+    margin-left: 20px;
+    font-size: 22px;
+  }
 
-.fd-xz:hover {
-  background: #409eff;
-  color: #fff;
-}
+  .excerpt-head img {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    margin-left: 30px;
+  }
 
-.fd-xz {
-  padding: 8px 20px 8px 20px;
-  background: #fff;
-  margin-right: 70px;
-  border-radius: 20px;
-}
-.head {
-  height: 60px;
-  width: calc(100% - 10px);
-  background: #e4e7ed;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-}
-  .bottom{
+  .head span:hover {
+    cursor: pointer;
+  }
+
+  .fd-xz:hover {
+    background: #409eff;
+    color: #fff;
+  }
+
+  .fd-xz {
+    padding: 8px 20px 8px 20px;
+    background: #fff;
+    margin-right: 70px;
+    border-radius: 20px;
+  }
+
+  .head {
+    height: 60px;
+    width: calc(100% - 10px);
+    background: #e4e7ed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+  }
+
+  .bottom {
     height: 100%;
     width: calc(100% - 10px);
     margin-left: 10px;

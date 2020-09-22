@@ -15,7 +15,8 @@
     </div>
     <div class="guidang-toubu">
       <div class="guidang-zuo">
-        <div v-for="(item,index) of list" class="guidang-zuo-a">
+        <div data-aos="fade-up"
+             data-aos-duration="3000" @click="gotoDetail(item)" v-for="(item,index) of list" class="guidang-zuo-a">
           <div class="zuo-head">
             <div class="zuo-head-img">
               <img :src="item.image"/>
@@ -23,19 +24,19 @@
           </div>
           <div class="zuo-center">
             <div class="zuo-center-head">
-            <div class="zuo-center-shang">
-              <span>{{item.name}}</span>
-            </div>
-            <div class="zuo-center-zhong">
-              <span>{{item.descInfo}}</span>
-            </div>
-            <div class="zuo-center-xia">
-              <span><i class="iconfont icon-shizhong"></i><span>{{item.createTimeStr}}</span></span>
-              <span><i class="iconfont icon-gerenzhongxin1"></i><span>{{item.author}}</span></span>
-              <span><i class="iconfont icon-mulu"></i><span >{{item.name}}</span></span>
-              <span><i class="iconfont icon-guankan01"></i><span>{{item.view}}</span></span>
-              <span><i class="iconfont icon-aixin"></i><span>{{item.likeNum}}</span></span>
-            </div>
+              <div class="zuo-center-shang">
+                <span>{{item.name}}</span>
+              </div>
+              <div class="zuo-center-zhong">
+                <span>{{item.descInfo}}</span>
+              </div>
+              <div class="zuo-center-xia">
+                <span><i class="iconfont icon-shizhong"></i><span>{{item.createTimeStr}}</span></span>
+                <span><i class="iconfont icon-gerenzhongxin1"></i><span>{{item.author}}</span></span>
+                <span><i class="iconfont icon-mulu"></i><span>{{item.name}}</span></span>
+                <span><i class="iconfont icon-guankan01"></i><span>{{item.view}}</span></span>
+                <span><i class="iconfont icon-aixin"></i><span>{{item.likeNum}}</span></span>
+              </div>
             </div>
           </div>
         </div>
@@ -44,13 +45,14 @@
         <div class="guidang-you-head">
           <div class="you-head-zuo">
             <el-input
+              @clear="clearSearch"
               placeholder="请输入关键字"
               v-model="input"
               clearable>
             </el-input>
           </div>
           <div class="you-head-you">
-            <el-button type="primary" icon="el-icon-search">搜索</el-button>
+            <el-button @click="getSearch"  type="primary" icon="el-icon-search">搜索</el-button>
           </div>
 
         </div>
@@ -61,27 +63,27 @@
             </div>
           </div>
           <div class="you-center-b">
-            <div v-for="(item,index) of List" class="you-center-b-a">
+            <div @click="gotoDetail(item)" v-for="(item,index) of List" class="you-center-b-a">
               <div class="you-center-b-a1">
                 <img :src="item.image"/>
               </div>
               <div class="you-center-b-a2">
-                <span>{{item.title}}</span>
+                <span>{{item.descInfo}}</span>
               </div>
             </div>
           </div>
         </div>
         <div class="guidang-bottom">
           <div class="guidang-bottom-head">
-          <div class="biaoqian-head">
-            <span>标签云</span>
-          </div>
-          <div class="biaoqian-bottom">
-            <div data-aos="zoom-in" data-aos-duration="2000" v-for="(item,index) of biaoqianList"
-                 :style="{background:randoColor()}" :class="createClasee(index)" class="bast">{{ item.name }}
+            <div class="biaoqian-head">
+              <span>标签云</span>
+            </div>
+            <div class="biaoqian-bottom">
+              <div data-aos="zoom-in" data-aos-duration="2000" v-for="(item,index) of label"
+                   :style="{background:randoColor()}" :class="createClasee(index)" class="bast">{{ item.name }}
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
@@ -89,88 +91,104 @@
 </template>
 
 <script>
-export default {
-  name: "Guidang",
-  data(){
-    return{
-      input:'',
-      list:[],
-      List:[{
-        image:'http://xlsb.luokangyuan.com/31.jpg',
-        title:'想折腾也得看运气不是，我是不是太倒霉了？！'
-      },{
-        image:'http://xlsb.luokangyuan.com/23.jpg',
-        title:'想折腾也得看运气不是，我是不是太倒霉了？！'
-      },{
-        image:'http://xlsb.luokangyuan.com/24.jpg',
-        title:'想折腾也得看运气不是，我是不是太倒霉了？！'
-      },],
-      biaoqianList:[{
-        name: 'Web前端'
-      }, {
-        name: 'CSS'
-      }, {
-        name: 'Java'
-      }, {
-        name: 'Html'
-      }, {
-        name: 'JavaScript'
-      }, {
-        name: '日常总结'
-      }, {
-        name: 'GitHub'
-      }, {
-        name: '每日读书'
-      },],
-      query:{
-        author:'',
-        classifyId:'',
-        desc:'',
-        limit: 0,
-        name:''
+  export default {
+    name: "Guidang",
+    data() {
+      return {
+        input: '',
+        list: [],
+        List: [],
+        label: [{
+          name: 'Web前端'
+        }, {
+          name: 'CSS'
+        }, {
+          name: 'Java'
+        }, {
+          name: 'Html'
+        }, {
+          name: 'JavaScript'
+        }, {
+          name: '日常总结'
+        }, {
+          name: 'GitHub'
+        }, {
+          name: '每日读书'
+        },],
+        query: {
+          author: '',
+          classifyId: '',
+          desc: '',
+          limit: 0,
+          name: ''
+        }
       }
-    }
-  },
-  methods:{
-    getSearch(){
-      this.$api.post(`/api/v1/blogs`,this.query, (res) => {
-        if (res) {
-          this.query = res.data;
-        }
-      })
     },
-    getBlogs(){
-      this.query.limit = '';
-      this.$api.post(`/api/v1/blogs`,this.query, (res) => {
-        if (res) {
+
+    methods: {
+      clearSearch(){
+        this.query.name = '',
+          this.getBlogs();
+      },
+      getTuijian() {
+        this.query.limit = 3;
+        this.$api.post(`/api/v1/blogs`, this.query, (res) => {
+          if (res) {
+            this.List = res.data;
+          }
+        })
+      },
+      gotoDetail(blog) {
+        let id = blog.id;
+        this.$router.push({
+          name: "Detail",
+          params: {
+            id: id
+          }
+        })
+      },
+      getSearch() {
+        this.query.name = this.input;
+        this.$api.post(`/api/v1/blogs`, this.query, (res) => {
+          if (res) {
+            this.list = res.data
+
+          }
+        })
+      },
+      getBlogs() {
+        this.query.limit = '';
+        this.$api.post(`/api/v1/blogs`, this.query, (res) => {
+          if (res) {
             this.list = res.data;
-        }
-      })
+          }
+        })
+      },
+      createClasee(index) {
+        return "" + (index + 1);
+      },
+      randoColor() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        let r1 = r.toString(16).length == 1 ? '0' + r.toString(16) : r.toString(16);
+        let g1 = g.toString(16).length == 1 ? '0' + g.toString(16) : g.toString(16);
+        let b1 = b.toString(16).length == 1 ? '0' + b.toString(16) : b.toString(16);
+        var color = '#' + r1 + g1 + b1;
+        return color;
+      },
     },
-    createClasee(index) {
-      return "" + (index + 1);
-    },
-    randoColor() {
-      var r = Math.floor(Math.random() * 256);
-      var g = Math.floor(Math.random() * 256);
-      var b = Math.floor(Math.random() * 256);
-      let r1 = r.toString(16).length == 1 ? '0' + r.toString(16) : r.toString(16);
-      let g1 = g.toString(16).length == 1 ? '0' + g.toString(16) : g.toString(16);
-      let b1 = b.toString(16).length == 1 ? '0' + b.toString(16) : b.toString(16);
-      var color = '#' + r1 + g1 + b1;
-      return color;
-    },
-  },
-mounted() {
-    this.getBlogs();
-    this.getSearch();
-}
-}
+    mounted() {
+      this.getBlogs();
+      this.getSearch();
+      this.getTuijian();
+    }
+  }
 
 </script>
 
 <style scoped>
-  .guidang{
+  .guidang {
     height: 100%;
     width: 100%;
     display: flex;
@@ -179,20 +197,24 @@ mounted() {
     flex-direction: column;
     background: #f5f5f5;
   }
-  .guidang-head{
+
+  .guidang-head {
     height: 400px;
     width: 100%;
   }
-  .guidang-head img{
+
+  .guidang-head img {
     height: 400px;
     width: 100%;
   }
-  .guidang-toubu{
+
+  .guidang-toubu {
     width: 1300px;
     display: flex;
     flex-direction: row;
   }
-  .bkrj{
+
+  .bkrj {
     height: 100px;
     width: 1300px;
     margin-top: 51px;
@@ -200,6 +222,7 @@ mounted() {
     align-items: center;
     justify-content: center;
   }
+
   .bkrj-center {
     display: flex;
     align-items: center;
@@ -232,13 +255,14 @@ mounted() {
   }
 
 
-  .guidang-zuo{
+  .guidang-zuo {
     width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .guidang-zuo-a{
+
+  .guidang-zuo-a {
     height: 200px;
     width: 860px;
     display: flex;
@@ -246,149 +270,175 @@ mounted() {
     background: #fff;
     margin-top: 20px;
   }
-  .guidang-zuo-a:hover{
+
+  .guidang-zuo-a:hover {
     cursor: pointer;
     color: #66b1ff;
-    box-shadow: rgba(0,0,0,.1) 3px 5px 5px;
+    box-shadow: rgba(0, 0, 0, .1) 3px 5px 5px;
   }
-  .zuo-head{
+
+  .zuo-head {
     height: 200px;
     width: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .zuo-head-img{
+
+  .zuo-head-img {
     height: 180px;
     width: 260px;
     overflow: hidden;
   }
-  .zuo-head img:hover{
-    transform: scale(1.1,1.1);
+
+  .zuo-head img:hover {
+    transform: scale(1.1, 1.1);
     transition: transform 0.7s ease;
   }
-  .zuo-head img{
+
+  .zuo-head img {
     height: 180px;
     width: 260px;
     transform: scale(1.0, 1.0);
     transition: transform 0.7s ease;
   }
-  .zuo-center{
+
+  .zuo-center {
     height: 200px;
     width: 570px;
     display: flex;
     align-items: center;
 
   }
-.zuo-center-head{
-  height: 180px;
-  width: 560px;
-  display: flex;
-  flex-direction: column;
-}
-.zuo-center-shang{
-  height: 50px;
-  width: 560px;
-  font-size: 26px;
-  font-family: 'Alibaba-PuHuiTi-Regular';
-}
 
-.zuo-center-zhong{
-  height: 90px;
-  width: 560px;
-  font-size: 16px;
-}
-.zuo-center-xia{
-  height: 40px;
-  width: 560px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-}
-.zuo-center-xia i{
-  margin-left: 10px;
-}
-  .guidang-you{
+  .zuo-center-head {
+    height: 180px;
+    width: 560px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .zuo-center-shang {
+    height: 50px;
+    width: 560px;
+    font-size: 26px;
+    font-family: 'Alibaba-PuHuiTi-Regular';
+  }
+
+  .zuo-center-zhong {
+    height: 90px;
+    width: 560px;
+    font-size: 16px;
+  }
+
+  .zuo-center-xia {
+    height: 40px;
+    width: 560px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+
+  .zuo-center-xia i {
+    margin-left: 10px;
+  }
+
+  .guidang-you {
     width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .guidang-you-head{
+
+  .guidang-you-head {
     height: 50px;
     width: 280px;
     margin-top: 20px;
     display: flex;
     flex-direction: row;
   }
-  .you-head-zuo{
+
+  .you-head-zuo {
     height: 50px;
     width: 170px;
   }
-  .you-head-you{
+
+  .you-head-you {
     height: 50px;
     width: 60px;
   }
-  .el-button{
+
+  .el-button {
     margin-left: 21px;
   }
-  .guidang-you-center{
+
+  .guidang-you-center {
     height: 340px;
     width: 280px;
     margin-top: 30px;
     background: #fff;
   }
-  .you-center-a{
+
+  .you-center-a {
     height: 60px;
     width: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .you-center-a-a{
+
+  .you-center-a-a {
     height: 40px;
     width: 260px;
     margin-top: 20px;
   }
-  .you-center-a-a span{
+
+  .you-center-a-a span {
     font-size: 22px;
     font-family: Alibaba-PuHuiTi-Regular;
   }
-  .you-center-b{
+
+  .you-center-b {
     height: 80px;
     width: 280px;
     display: flex;
     align-items: center;
     flex-direction: column;
   }
-  .you-center-b-a:hover{
+
+  .you-center-b-a:hover {
     cursor: pointer;
     color: #63a35c;
   }
-  .you-center-b-a{
+
+  .you-center-b-a {
     height: 70px;
     width: 260px;
     display: flex;
     flex-direction: row;
     margin-top: 20px;
   }
-  .you-center-b-a1{
+
+  .you-center-b-a1 {
     height: 70px;
     width: 90px;
   }
-  .you-center-b-a1 img{
+
+  .you-center-b-a1 img {
     height: 70px;
     width: 90px;
   }
-  .you-center-b-a2{
+
+  .you-center-b-a2 {
     height: 70px;
     width: 160px;
     margin-left: 10px;
-    font-size: 14px;
+    font-size: 10px;
     display: flex;
     align-items: center;
   }
-  .guidang-bottom{
+
+  .guidang-bottom {
     height: 250px;
     width: 280px;
     margin-top: 30px;
@@ -397,19 +447,22 @@ mounted() {
     align-items: center;
     justify-content: center;
   }
-  .guidang-bottom-head{
+
+  .guidang-bottom-head {
     height: 230px;
     width: 260px;
     display: flex;
     flex-direction: column;
   }
-.biaoqian-head{
-  height: 50px;
-  width: 260px;
-  font-size: 22px;
-  font-family: 'Alibaba-PuHuiTi-Regular';
-}
-  .biaoqian-bottom{
+
+  .biaoqian-head {
+    height: 50px;
+    width: 260px;
+    font-size: 22px;
+    font-family: 'Alibaba-PuHuiTi-Regular';
+  }
+
+  .biaoqian-bottom {
     height: 180px;
     width: 260px;
     display: flex;
@@ -417,14 +470,17 @@ mounted() {
     flex-wrap: wrap;
     align-content: end;
   }
-.biaoqian-bottom {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.biaoqian-bottom:hover{
-  cursor: pointer;
-}
+
+  .biaoqian-bottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .biaoqian-bottom:hover {
+    cursor: pointer;
+  }
+
   .bast {
     display: flex;
     justify-content: center;
