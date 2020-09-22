@@ -62,11 +62,11 @@
         dialogFormVisible: false,
         articleManagementData: [],
         articleManagement: {
-          name: '',
           author: '',
-          descInfo: '',
-          image: '',
-          view:''
+          classifyId: '',
+          desc: '',
+          limit: '',
+          name: ''
         }
       }
     },
