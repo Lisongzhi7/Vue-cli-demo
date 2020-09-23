@@ -1,6 +1,6 @@
 import axios from 'axios'
 let http = axios.create({
-    baseURL: 'http://192.168.31.232:8852/',
+    baseURL: 'http://luokangyuan.com:8853/',
     withCredentials: false,
     headers: {
       'Content-Type': 'application/json;charset=utf-8'

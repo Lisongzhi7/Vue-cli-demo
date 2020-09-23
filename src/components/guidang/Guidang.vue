@@ -103,7 +103,7 @@
         }, {
           name: 'CSS'
         }, {
-          name: 'Java'
+          name: 'Vue'
         }, {
           name: 'Html'
         }, {
@@ -119,7 +119,7 @@
           author: '',
           classifyId: '',
           desc: '',
-          limit: 0,
+          limit: '',
           name: ''
         }
       }

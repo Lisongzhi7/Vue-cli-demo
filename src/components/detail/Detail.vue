@@ -29,7 +29,7 @@
         <div class="center-Name">
           <span>{{blog.name}}</span>
         </div>
-
+        
         <div class="center-content">
           <span v-html="blog.content"></span>
         </div>
