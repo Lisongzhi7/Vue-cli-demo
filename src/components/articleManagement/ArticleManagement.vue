@@ -28,7 +28,7 @@
         <el-table-column
           align="center"
           prop="image"
-          label="图片地址">
+          label="图片地址" show-overflow-tooltip="true">
         </el-table-column>
         <el-table-column
           align="center"

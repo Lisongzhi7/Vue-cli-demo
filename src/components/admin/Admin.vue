@@ -10,11 +10,7 @@
               <router-link to="/articleManagement"><span>文章管理</span></router-link>
               <router-link to="/article"><span>创建文章</span></router-link>
               <!--下面还未开通-->
-              <router-link to="/newest"><span>最新文章</span></router-link>
-              <router-link to="/paga"><span>我的首页</span></router-link>
-              <router-link to="/diary"><span>博客日记</span></router-link>
-              <router-link to="/record"><span>碎言碎语</span></router-link>
-              <router-link to="/timerShaft"><span>时间轴</span></router-link>
+
             </div>
             <div class="fd-data-box">
               <router-view></router-view>
