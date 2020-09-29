@@ -47,7 +47,7 @@
       <router-view></router-view>
     </div>
     <div class="fd-bottom">
-      蜀ICP备18020377号
+      蜀ICP备2020027592号
     </div>
   </div>
 </template>
