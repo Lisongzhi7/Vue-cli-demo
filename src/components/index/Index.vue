@@ -111,7 +111,7 @@
       (function () {
         var a_idx = 0;
         window.onclick = function (event) {
-          var a = new Array("❤老王❤", "❤很高兴❤", "❤在最好❤", "❤年龄❤", "❤遇见❤", "❤最好的你❤", "❤祝愿❤", "❤我们❤", "❤此生❤", "❤一直❤", "❤幸福下去❤", "❤I LOVE YOU!❤");
+          var a = new Array("❤刻苦❤", "❤努力❤", "❤学习❤", "❤坚持❤", "❤不懈❤", "❤顽强❤", "❤拼搏❤", "❤热爱❤", "❤生活❤", "❤富强❤", "❤明主❤", "❤和谐❤");
 
           var heart = document.createElement("b");	//创建b元素
           heart.onselectstart = new Function('event.returnValue=false');	//防止拖动
