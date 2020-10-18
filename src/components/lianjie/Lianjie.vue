@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="sysy-bottom">
-        <div v-for="(item,index) of list" class="bottom-a" :class="xzColor(index)">
+        <div v-for="(item,index) of list" class="bottom-a mytubiao" :class="xzColor(index)">
           <div class="bottom-aa">
             <div class="bottom-aa-shang">
               <span>{{item.time}}</span>
@@ -76,6 +76,10 @@
           time:'2020-09-25',
           desc:'当所有人不理解的时候，我心里就很烦，本来已经很努力的去做了，可得到的又是什么呢？',
           image:'http://xlsb.luokangyuan.com/tubiao3.png'
+        },{
+          time:'2020-10-11',
+          desc:'努力做好自己，朝着向往的生活努力，前方路途很艰难，不能放弃!',
+          image:'http://xlsb.luokangyuan.com/tubiao1.png'
         },]
       }
     },
@@ -216,6 +220,7 @@
     height: 40px;
     width: 40px;
   }
+
   .tubiaoColor2{
     transform:rotate(8deg);
     background: rgb(210,251,253);
@@ -248,5 +253,11 @@
     transform:rotate(-8deg);
     background: rgb(254,201,227);
   }
-
+  .tubiaoColor10{
+    transform:rotate(-8deg);
+    background: rgb(210,251,253);
+  }
+  .mytubiao{
+    margin-top: 60px;
+  }
 </style>
